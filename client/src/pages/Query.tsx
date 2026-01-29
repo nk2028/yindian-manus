@@ -1,12 +1,11 @@
-// Swiss International Style - Query Page
-// Design: Functional, clear information hierarchy with tight spacing
+// Swiss SBB Modern Style - Query Page
+// Design: Bold red accents, efficient layout, clear hierarchy
 
 import { queryCharacters } from "@/lib/api";
 import { buildTableRows } from "@/lib/dataProcessor";
 import type { CharacterResult, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
-import { Button } from "@/components/ui/button";
 
 export default function Query() {
   const { processedLanguages, settings } = useApp();
@@ -15,12 +14,14 @@ export default function Query() {
   const [tableRows, setTableRows] = useState<TableRow[]>([]);
   const [isQuerying, setIsQuerying] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasQueried, setHasQueried] = useState(false);
 
   const handleQuery = async () => {
     if (!input.trim()) return;
 
     setIsQuerying(true);
     setError(null);
+    setHasQueried(true);
 
     try {
       const results = await queryCharacters(input.trim());
@@ -51,30 +52,29 @@ export default function Query() {
   const characters = queryResults.map(([char]) => char);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       {/* Query Input Section */}
-      <div className="border-b-2 border-black p-4">
+      <div className="bg-white p-3 shadow-sm">
         <div className="max-w-7xl mx-auto">
           <div className="flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
               placeholder="输入汉字查询读音"
-              className="flex-1 border-2 border-black px-3 py-2 text-base focus:outline-none focus:border-[#EB0000]"
-              disabled={isQuerying}
+              className="flex-1 border-2 border-gray-300 px-3 py-2 text-base focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20"
             />
-            <Button
+            <button
               onClick={handleQuery}
-              disabled={isQuerying || !input.trim()}
-              className="bg-[#EB0000] text-white border-2 border-black px-6 py-2 hover:bg-[#C00000] disabled:bg-gray-300 disabled:text-gray-500"
+              disabled={!input.trim() || isQuerying}
+              className="px-8 py-2 bg-[#EB0000] text-white font-bold hover:bg-[#C50000] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
               {isQuerying ? "查询中..." : "查询"}
-            </Button>
+            </button>
           </div>
           {error && (
-            <div className="mt-2 text-[#EB0000] text-sm">{error}</div>
+            <div className="mt-2 text-[#EB0000] text-sm font-medium">{error}</div>
           )}
         </div>
       </div>
@@ -83,17 +83,17 @@ export default function Query() {
       {tableRows.length > 0 && (
         <div className="p-4">
           <div className="max-w-7xl mx-auto">
-            <div className="overflow-x-auto border-2 border-black">
-              <table className="w-full border-collapse">
+            <div className="overflow-x-auto shadow-sm">
+              <table className="w-full border-collapse border border-gray-300 bg-white">
                 <thead>
-                  <tr className="bg-black text-white">
-                    <th className="border-r-2 border-white px-2 py-1 text-left text-sm font-bold">
+                  <tr className="bg-[#EB0000] text-white">
+                    <th className="border border-gray-300 px-3 py-2 text-left text-sm font-bold sticky left-0 bg-[#EB0000]">
                       语言
                     </th>
                     {characters.map((char, idx) => (
                       <th
                         key={idx}
-                        className="border-r-2 border-white px-2 py-1 text-center text-sm font-bold last:border-r-0"
+                        className="border border-gray-300 px-3 py-2 text-center text-lg font-bold"
                       >
                         {char}
                       </th>
@@ -101,26 +101,28 @@ export default function Query() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tableRows.map((row, rowIdx) => (
+                  {tableRows.map((row) => (
                     <tr
                       key={row.languageId}
-                      className={rowIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                      className="hover:bg-gray-50 transition-colors"
                     >
-                      <td className="border-r-2 border-t-2 border-black px-2 py-1">
-                        <div className="flex items-center gap-2">
+                      <td className="border border-gray-300 px-2 py-2 bg-white sticky left-0">
+                        <div className="flex items-center gap-1.5">
                           <span
-                            className="inline-block px-2 py-0.5 text-white text-xs font-bold"
+                            className="inline-block px-1.5 py-0.5 text-white text-xs font-bold"
                             style={{ backgroundColor: row.color }}
                           >
                             {row.languageAbbr}
                           </span>
-                          <span className="text-sm">{row.languageName}</span>
+                          <span className="text-sm font-medium text-gray-800">
+                            {row.languageName}
+                          </span>
                         </div>
                       </td>
                       {characters.map((char, charIdx) => (
                         <td
-                          key={charIdx}
-                          className="border-r-2 border-t-2 border-black px-2 py-1 text-center text-sm last:border-r-0"
+                          key={`char-${charIdx}`}
+                          className="border border-gray-300 px-2 py-2 text-sm bg-white font-mono"
                         >
                           {row.pronunciations[char] || "—"}
                         </td>
@@ -130,7 +132,7 @@ export default function Query() {
                 </tbody>
               </table>
             </div>
-            <div className="mt-2 text-xs text-gray-600">
+            <div className="mt-2 text-sm text-gray-600 font-medium">
               共 {tableRows.length} 种语言
             </div>
           </div>
@@ -138,11 +140,13 @@ export default function Query() {
       )}
 
       {/* Empty State */}
-      {tableRows.length === 0 && !isQuerying && (
-        <div className="flex items-center justify-center h-64">
-          <div className="text-center text-gray-500">
-            <div className="text-lg font-bold mb-2">音典网页版</div>
-            <div className="text-sm">输入汉字开始查询</div>
+      {!hasQueried && (
+        <div className="flex items-center justify-center min-h-[500px]">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-[#EB0000] mb-3 tracking-tight">
+              音典网页版
+            </h2>
+            <p className="text-lg text-gray-600">输入汉字开始查询</p>
           </div>
         </div>
       )}

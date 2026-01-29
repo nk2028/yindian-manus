@@ -22,22 +22,22 @@ function Navigation() {
   ];
 
   return (
-    <nav className="bg-black text-white border-b-2 border-black">
+    <nav className="bg-[#EB0000] text-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-12">
-          <div className="text-lg font-bold">音典</div>
-          <div className="flex gap-1">
+        <div className="flex items-center justify-between h-14">
+          <div className="text-xl font-bold tracking-tight">音典</div>
+          <div className="flex gap-0">
             {navItems.map((item) => (
-              <Link key={item.path} href={item.path}>
-                <a
-                  className={`px-4 py-2 text-sm font-bold transition-colors ${
-                    location === item.path
-                      ? "bg-[#EB0000] text-white"
-                      : "text-white hover:bg-gray-800"
-                  }`}
-                >
-                  {item.label}
-                </a>
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`px-5 py-4 text-sm font-bold transition-colors ${
+                  location === item.path
+                    ? "bg-white text-[#EB0000]"
+                    : "text-white hover:bg-[#C50000]"
+                }`}
+              >
+                {item.label}
               </Link>
             ))}
           </div>

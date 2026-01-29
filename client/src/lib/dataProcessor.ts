@@ -40,10 +40,10 @@ export function processLanguages(
 ): ProcessedLanguage[] {
   const config = DISPLAY_MODE_CONFIGS[displayMode];
 
-  return languages.map((lang, index) => ({
-    id: index,
-    name: lang[0],
-    abbreviation: lang[1],
+  return languages.map((lang) => ({
+    id: Number(lang[0]),
+    name: String(lang[1]),
+    abbreviation: String(lang[2]),
     sortOrder: lang[config.sortIndex] as number,
     color: lang[config.colorIndex] as string,
     region: lang[config.regionIndex] as string,

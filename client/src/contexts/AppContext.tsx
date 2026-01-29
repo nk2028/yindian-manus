@@ -54,7 +54,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         if (!mounted) return;
         setRawLanguages(data);
         // Select all languages by default
-        const allIds = new Set(data.map((_, index) => index));
+        const allIds = new Set(data.map((lang) => Number(lang[0])));
         setSettings((prev) => ({
           ...prev,
           selectedLanguages: allIds,
@@ -95,7 +95,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const selectAllLanguages = () => {
-    const allIds = new Set(rawLanguages.map((_, index) => index));
+    const allIds = new Set(rawLanguages.map((lang) => Number(lang[0])));
     setSettings((prev) => ({ ...prev, selectedLanguages: allIds }));
   };
 
