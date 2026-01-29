@@ -6,6 +6,7 @@ import { buildTableRows } from "@/lib/dataProcessor";
 import type { CharacterResult, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
+import { getTranslation } from "@/lib/i18n";
 
 // Calculate text color (black or white) based on background color brightness
 function getTextColor(bgColor: string | null | undefined): string {
@@ -30,7 +31,8 @@ function getTextColor(bgColor: string | null | undefined): string {
 }
 
 export default function Query() {
-  const { processedLanguages, settings } = useApp();
+  const { processedLanguages, settings, language } = useApp();
+  const t = getTranslation(language);
   const [input, setInput] = useState("");
   const [queryResults, setQueryResults] = useState<CharacterResult[]>([]);
   const [tableRows, setTableRows] = useState<TableRow[]>([]);
@@ -50,14 +52,19 @@ export default function Query() {
       setQueryResults(results);
 
       // Build table rows
+      console.log('Building table rows...');
+      console.log('Results:', results);
+      console.log('Processed languages count:', processedLanguages.length);
+      console.log('Selected languages count:', settings.selectedLanguages.size);
       const rows = buildTableRows(
         results,
         processedLanguages,
         settings.selectedLanguages
       );
+      console.log('Table rows built:', rows.length);
       setTableRows(rows);
     } catch (err) {
-      setError("查询失败,请重试");
+      setError(t.query.noResults);
       console.error(err);
     } finally {
       setIsQuerying(false);
@@ -84,15 +91,15 @@ export default function Query() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyPress}
-              placeholder="输入汉字查询读音"
-              className="flex-1 border-2 border-gray-300 px-3 py-2 text-base focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20"
+              placeholder={t.query.placeholder}
+              className="flex-1 border-2 border-gray-300 px-3 py-2 text-base focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20 rounded-full"
             />
             <button
               onClick={handleQuery}
               disabled={!input.trim() || isQuerying}
-              className="px-8 py-2 bg-[#EB0000] text-white font-bold hover:bg-[#C50000] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              className="px-8 py-2 bg-[#EB0000] text-white font-bold hover:bg-[#C50000] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-full"
             >
-              {isQuerying ? "查询中..." : "查询"}
+              {isQuerying ? t.query.buttonLoading : t.query.button}
             </button>
           </div>
           {error && (
@@ -104,18 +111,19 @@ export default function Query() {
       {/* Results Table Section */}
       {tableRows.length > 0 && (
         <div className="p-4">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-full mx-auto">
             <div className="overflow-x-auto shadow-sm">
-              <table className="w-full border-collapse border border-gray-300 bg-white">
+              <table className="border-collapse border border-gray-300 bg-white">
                 <thead>
                   <tr className="bg-[#EB0000] text-white">
-                    <th className="border border-gray-300 px-3 py-2 text-left text-sm font-bold sticky left-0 bg-[#EB0000]">
-                      语言
+                    <th className="border border-gray-300 px-2 py-2 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+                      {t.query.tableLanguage}
                     </th>
                     {characters.map((char, idx) => (
                       <th
                         key={idx}
-                        className="border border-gray-300 px-3 py-2 text-center text-lg font-bold"
+                        className="border border-gray-300 px-2 py-2 text-center text-lg font-bold"
+                        style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                       >
                         {char}
                       </th>
@@ -133,7 +141,7 @@ export default function Query() {
                       key={row.languageId}
                       className="hover:bg-gray-50 transition-colors"
                     >
-                      <td className="border border-gray-300 px-2 py-2 bg-white sticky left-0">
+                      <td className="border border-gray-300 px-2 py-2 bg-white sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                         <span
                           className="inline-block px-2 py-1 text-sm font-bold"
                           style={{ 
@@ -147,7 +155,8 @@ export default function Query() {
                       {characters.map((char, charIdx) => (
                         <td
                           key={`char-${charIdx}`}
-                          className="border border-gray-300 px-2 py-2 text-sm bg-white font-mono"
+                          className="border border-gray-300 px-2 py-2 text-sm bg-white font-mono break-words overflow-hidden"
+                          style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                         >
                           {row.pronunciations[char] || "—"}
                         </td>
@@ -170,9 +179,9 @@ export default function Query() {
         <div className="flex items-center justify-center min-h-[500px]">
           <div className="text-center">
             <h2 className="text-4xl font-bold text-[#EB0000] mb-3 tracking-tight">
-              音典网页版
+              {t.query.title}
             </h2>
-            <p className="text-lg text-gray-600">输入汉字开始查询</p>
+            <p className="text-lg text-gray-600">{t.query.subtitle}</p>
           </div>
         </div>
       )}

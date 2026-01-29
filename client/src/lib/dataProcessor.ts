@@ -14,17 +14,17 @@ import type {
  * Display mode configurations
  */
 export const DISPLAY_MODE_CONFIGS: Record<DisplayMode, DisplayModeConfig> = {
-  atlas2: {
+  地圖集二: {
     sortIndex: 3, // 地圖集二排序
     colorIndex: 4, // 地圖集二顏色
     regionIndex: 5, // 地圖集二分區
   },
-  yindian: {
+  音典: {
     sortIndex: 6, // 音典排序
     colorIndex: 7, // 音典顏色
     regionIndex: 8, // 音典分區
   },
-  chenfang: {
+  陳邡: {
     sortIndex: 9, // 陳邡排序
     colorIndex: 10, // 陳邡顏色
     regionIndex: 11, // 陳邡分區
@@ -106,10 +106,5 @@ export function buildTableRows(
  * Get display mode label in Chinese
  */
 export function getDisplayModeLabel(mode: DisplayMode): string {
-  const labels: Record<DisplayMode, string> = {
-    atlas2: "地圖集二",
-    yindian: "音典",
-    chenfang: "陳邡",
-  };
-  return labels[mode];
+  return mode;
 }

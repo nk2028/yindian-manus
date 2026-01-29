@@ -5,6 +5,29 @@ import { useApp } from "@/contexts/AppContext";
 import { getDisplayModeLabel } from "@/lib/dataProcessor";
 import type { DisplayMode } from "@/types";
 import { useState, useMemo } from "react";
+import { getTranslation, formatString } from "@/lib/i18n";
+
+// Calculate text color (black or white) based on background color brightness
+function getTextColor(bgColor: string | null | undefined): string {
+  if (!bgColor) return '#000000'; // Default to black if no color
+  
+  // Remove # if present
+  const hex = bgColor.replace('#', '');
+  
+  // Handle invalid hex colors
+  if (hex.length !== 6) return '#000000';
+  
+  // Convert to RGB
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  
+  // Calculate relative luminance (perceived brightness)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  
+  // Return black for light backgrounds, white for dark backgrounds
+  return luminance > 0.5 ? '#000000' : '#FFFFFF';
+}
 
 export default function Settings() {
   const {
@@ -14,7 +37,9 @@ export default function Settings() {
     toggleLanguage,
     selectAllLanguages,
     deselectAllLanguages,
+    language,
   } = useApp();
+  const t = getTranslation(language);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -29,20 +54,20 @@ export default function Settings() {
     );
   }, [processedLanguages, searchTerm]);
 
-  // Group languages by color for visual organization
-  const languagesByColor = useMemo(() => {
+  // Group languages by region for visual organization
+  const languagesByRegion = useMemo(() => {
     const groups = new Map<string, typeof processedLanguages>();
     filteredLanguages.forEach((lang) => {
-      const color = lang.color;
-      if (!groups.has(color)) {
-        groups.set(color, []);
+      const region = lang.region;
+      if (!groups.has(region)) {
+        groups.set(region, []);
       }
-      groups.get(color)!.push(lang);
+      groups.get(region)!.push(lang);
     });
     return Array.from(groups.entries()).sort(([, a], [, b]) => b.length - a.length);
   }, [filteredLanguages]);
 
-  const displayModes: DisplayMode[] = ["atlas2", "yindian", "chenfang"];
+  const displayModes: DisplayMode[] = ["地圖集二", "音典", "陳邡"];
 
   const selectedCount = settings.selectedLanguages.size;
   const totalCount = processedLanguages.length;
@@ -51,21 +76,21 @@ export default function Settings() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4 text-[#EB0000] pb-3 border-b-2 border-[#EB0000]">
-          设置
+          {t.settings.title}
         </h1>
 
         {/* Display Mode Section */}
         <section className="mb-4 bg-white p-4 shadow-sm">
-          <h2 className="text-lg font-bold mb-3 text-gray-800">显示方式</h2>
-          <div className="flex gap-0">
+          <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.displayMode}</h2>
+          <div className="flex gap-2">
             {displayModes.map((mode) => (
               <button
                 key={mode}
                 onClick={() => updateDisplayMode(mode)}
-                className={`px-6 py-2.5 font-bold border-2 transition-colors ${
+                className={`px-6 py-2.5 font-medium transition-colors rounded-full ${
                   settings.displayMode === mode
-                    ? "bg-[#EB0000] text-white border-[#EB0000] z-10"
-                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                    ? "bg-[#EB0000] text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 {getDisplayModeLabel(mode)}
@@ -78,20 +103,20 @@ export default function Settings() {
         <section className="bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-800">
-              显示语言 ({selectedCount}/{totalCount})
+              {t.settings.languageSelection} ({selectedCount}/{totalCount})
             </h2>
             <div className="flex gap-2">
               <button
                 onClick={selectAllLanguages}
-                className="px-4 py-1.5 text-sm font-bold bg-[#EB0000] text-white hover:bg-[#C50000] transition-colors"
+                className="px-4 py-1.5 text-sm font-medium bg-[#EB0000] text-white hover:bg-[#C50000] transition-colors rounded-full"
               >
-                全选
+                {t.settings.selectAll}
               </button>
               <button
                 onClick={deselectAllLanguages}
-                className="px-4 py-1.5 text-sm font-bold bg-gray-600 text-white hover:bg-gray-700 transition-colors"
+                className="px-4 py-1.5 text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors rounded-full"
               >
-                全不选
+                {t.settings.deselectAll}
               </button>
             </div>
           </div>
@@ -103,21 +128,24 @@ export default function Settings() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="搜索语言..."
-              className="w-full border-2 border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20"
+              className="w-full border-2 border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20 rounded-full"
             />
           </div>
 
-          {/* Ultra-dense Language Grid grouped by color */}
+          {/* Ultra-dense Language Grid grouped by region */}
           <div className="max-h-[600px] overflow-y-auto border border-gray-300">
-            {languagesByColor.map(([color, languages]) => (
-              <div key={color} className="border-b border-gray-200 last:border-b-0">
+            {languagesByRegion.map(([region, languages]) => {
+              const regionColor = languages[0]?.color || '#EB0000';
+              const textColor = getTextColor(regionColor);
+              return (
+              <div key={region} className="border-b border-gray-200 last:border-b-0">
                 <div
-                  className="text-xs font-bold px-2 py-1 text-white sticky top-0 z-10"
-                  style={{ backgroundColor: color }}
+                  className="text-xs font-bold px-2 py-1 sticky top-0 z-10"
+                  style={{ backgroundColor: regionColor, color: textColor }}
                 >
-                  {color} ({languages.length})
+                  {region} ({languages.length})
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12">
                   {languages.map((lang) => (
                     <label
                       key={lang.id}
@@ -127,17 +155,17 @@ export default function Settings() {
                         type="checkbox"
                         checked={settings.selectedLanguages.has(lang.id)}
                         onChange={() => toggleLanguage(lang.id)}
-                        className="w-3 h-3 mt-0.5 flex-shrink-0 accent-[#EB0000]"
+                        className="w-3 h-3 mt-0.5 flex-shrink-0 accent-gray-600"
                       />
-                      <span className="min-w-0 break-words">
-                        <span className="font-bold text-gray-800">{lang.abbreviation}</span>{" "}
-                        <span className="text-gray-600">{lang.name}</span>
+                      <span className="min-w-0 break-words text-gray-800">
+                        {lang.name}
                       </span>
                     </label>
                   ))}
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </section>
       </div>

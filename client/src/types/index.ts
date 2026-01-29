@@ -34,7 +34,7 @@ export type CharacterResult = [string, Pronunciation[]];
 /**
  * Display mode for sorting and coloring
  */
-export type DisplayMode = "atlas2" | "yindian" | "chenfang";
+export type DisplayMode = "地圖集二" | "音典" | "陳邡";
 
 /**
  * Display mode configuration

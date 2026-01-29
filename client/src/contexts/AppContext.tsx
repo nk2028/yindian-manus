@@ -8,6 +8,7 @@ import type {
   ProcessedLanguage,
   UserSettings,
 } from "@/types";
+import type { Language } from "@/lib/i18n";
 import {
   createContext,
   useContext,
@@ -30,20 +31,65 @@ interface AppContextValue {
   toggleLanguage: (langId: number) => void;
   selectAllLanguages: () => void;
   deselectAllLanguages: () => void;
+  
+  // UI language
+  language: Language;
+  setLanguage: (lang: Language) => void;
 }
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
 
+// Migration map for old displayMode values
+const DISPLAY_MODE_MIGRATION: Record<string, DisplayMode> = {
+  atlas2: "地圖集二",
+  yindian: "音典",
+  chenfang: "陳邡",
+};
+
 const DEFAULT_SETTINGS: UserSettings = {
-  displayMode: "atlas2",
+  displayMode: "地圖集二",
   selectedLanguages: new Set<number>(),
 };
+
+const DEFAULT_LANGUAGE: Language = '香港';
+
+// Migrate old displayMode value if needed
+function migrateDisplayMode(mode: string): DisplayMode {
+  return (DISPLAY_MODE_MIGRATION[mode] as DisplayMode) || mode as DisplayMode;
+}
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [rawLanguages, setRawLanguages] = useState<LanguageInfo[]>([]);
   const [isLoadingLanguages, setIsLoadingLanguages] = useState(true);
   const [languagesError, setLanguagesError] = useState<Error | null>(null);
-  const [settings, setSettings] = useState<UserSettings>(DEFAULT_SETTINGS);
+  const [language, setLanguageState] = useState<Language>(() => {
+    // Try to load language from localStorage
+    try {
+      const saved = localStorage.getItem('yindian-language');
+      if (saved) {
+        return saved as Language;
+      }
+    } catch (e) {
+      console.error('Failed to load language:', e);
+    }
+    return DEFAULT_LANGUAGE;
+  });
+  const [settings, setSettings] = useState<UserSettings>(() => {
+    // Try to load settings from localStorage with migration
+    try {
+      const saved = localStorage.getItem('yindian-settings');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          displayMode: migrateDisplayMode(parsed.displayMode),
+          selectedLanguages: new Set(parsed.selectedLanguages || []),
+        };
+      }
+    } catch (e) {
+      console.error('Failed to load settings:', e);
+    }
+    return DEFAULT_SETTINGS;
+  });
 
   // Load languages on mount
   useEffect(() => {
@@ -103,6 +149,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSettings((prev) => ({ ...prev, selectedLanguages: new Set() }));
   };
 
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem('yindian-language', lang);
+    } catch (e) {
+      console.error('Failed to save language:', e);
+    }
+  };
+
   const value: AppContextValue = {
     rawLanguages,
     processedLanguages,
@@ -113,6 +168,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toggleLanguage,
     selectAllLanguages,
     deselectAllLanguages,
+    language,
+    setLanguage,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
