@@ -7,6 +7,28 @@ import type { CharacterResult, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
 
+// Calculate text color (black or white) based on background color brightness
+function getTextColor(bgColor: string | null | undefined): string {
+  if (!bgColor) return '#000000'; // Default to black if no color
+  
+  // Remove # if present
+  const hex = bgColor.replace('#', '');
+  
+  // Handle invalid hex colors
+  if (hex.length !== 6) return '#000000';
+  
+  // Convert to RGB
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  
+  // Calculate relative luminance (perceived brightness)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  
+  // Return black for light backgrounds, white for dark backgrounds
+  return luminance > 0.5 ? '#000000' : '#FFFFFF';
+}
+
 export default function Query() {
   const { processedLanguages, settings } = useApp();
   const [input, setInput] = useState("");
@@ -101,23 +123,26 @@ export default function Query() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tableRows.map((row) => (
+                  {tableRows.map((row) => {
+                    // Debug: log color value
+                    if (typeof window !== 'undefined' && (window as any).__DEBUG_TABLE_ROWS) {
+                      console.log('Row:', row.languageAbbr, 'Color:', row.color);
+                    }
+                    return (
                     <tr
                       key={row.languageId}
                       className="hover:bg-gray-50 transition-colors"
                     >
                       <td className="border border-gray-300 px-2 py-2 bg-white sticky left-0">
-                        <div className="flex items-center gap-1.5">
-                          <span
-                            className="inline-block px-1.5 py-0.5 text-white text-xs font-bold"
-                            style={{ backgroundColor: row.color }}
-                          >
-                            {row.languageAbbr}
-                          </span>
-                          <span className="text-sm font-medium text-gray-800">
-                            {row.languageName}
-                          </span>
-                        </div>
+                        <span
+                          className="inline-block px-2 py-1 text-sm font-bold"
+                          style={{ 
+                            backgroundColor: row.color,
+                            color: getTextColor(row.color)
+                          }}
+                        >
+                          {row.languageAbbr}
+                        </span>
                       </td>
                       {characters.map((char, charIdx) => (
                         <td
@@ -128,7 +153,8 @@ export default function Query() {
                         </td>
                       ))}
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

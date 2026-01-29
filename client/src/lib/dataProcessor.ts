@@ -15,19 +15,19 @@ import type {
  */
 export const DISPLAY_MODE_CONFIGS: Record<DisplayMode, DisplayModeConfig> = {
   atlas2: {
-    sortIndex: 2, // 地圖集二排序
-    colorIndex: 3, // 地圖集二顏色
-    regionIndex: 4, // 地圖集二分區
+    sortIndex: 3, // 地圖集二排序
+    colorIndex: 4, // 地圖集二顏色
+    regionIndex: 5, // 地圖集二分區
   },
   yindian: {
-    sortIndex: 5, // 音典排序
-    colorIndex: 6, // 音典顏色
-    regionIndex: 7, // 音典分區
+    sortIndex: 6, // 音典排序
+    colorIndex: 7, // 音典顏色
+    regionIndex: 8, // 音典分區
   },
   chenfang: {
-    sortIndex: 8, // 陳邡排序
-    colorIndex: 9, // 陳邡顏色
-    regionIndex: 10, // 陳邡分區
+    sortIndex: 9, // 陳邡排序
+    colorIndex: 10, // 陳邡顏色
+    regionIndex: 11, // 陳邡分區
   },
 };
 
@@ -58,6 +58,12 @@ export function buildTableRows(
   processedLanguages: ProcessedLanguage[],
   selectedLanguageIds: Set<number>
 ): TableRow[] {
+  // Create a map of language ID to language info for quick lookup
+  const langMap = new Map<number, ProcessedLanguage>();
+  processedLanguages.forEach((lang) => {
+    langMap.set(lang.id, lang);
+  });
+
   // Create a map of language ID to pronunciations for each character
   const langToPronunciations = new Map<number, { [char: string]: string }>();
 
@@ -76,7 +82,7 @@ export function buildTableRows(
   langToPronunciations.forEach((pronunciations, langId) => {
     if (!selectedLanguageIds.has(langId)) return;
 
-    const lang = processedLanguages[langId];
+    const lang = langMap.get(langId);
     if (!lang) return;
 
     rows.push({
