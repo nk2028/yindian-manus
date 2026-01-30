@@ -1,6 +1,3 @@
-// Swiss SBB Modern Style - Query Page
-// Design: Bold red accents, efficient layout, clear hierarchy
-
 import { queryCharacters } from "@/lib/api";
 import { buildTableRows, parse廣韻Pronunciation } from "@/lib/dataProcessor";
 import type { CharacterResult, TableRow } from "@/types";

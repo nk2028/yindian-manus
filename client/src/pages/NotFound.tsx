@@ -1,5 +1,3 @@
-// Swiss International Style - 404 Page
-
 import { Link } from "wouter";
 
 export default function NotFound() {

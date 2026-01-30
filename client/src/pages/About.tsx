@@ -1,6 +1,3 @@
-// Swiss SBB Modern Style - About Page
-// Design: Clean information display with red accents
-
 import { useApp } from "@/contexts/AppContext";
 import { getTranslation } from "@/lib/i18n";
 

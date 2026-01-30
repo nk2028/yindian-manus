@@ -1,6 +1,3 @@
-// Custom Language Selector with semi-transparent dropdown
-// Design: Modern SBB style with backdrop blur and smooth transitions
-
 import { useState, useRef, useEffect } from "react";
 import { LANGUAGE_DISPLAY_NAMES, type Language } from "@/lib/i18n";
 

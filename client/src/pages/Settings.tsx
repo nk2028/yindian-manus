@@ -1,6 +1,3 @@
-// Swiss SBB Modern Style - Settings Page
-// Design: Bold red accents, ultra-dense language grid for 2400+ languages
-
 import { useApp } from "@/contexts/AppContext";
 import { getDisplayModeLabel } from "@/lib/dataProcessor";
 import type { DisplayMode } from "@/types";
@@ -39,6 +36,7 @@ export default function Settings() {
     selectAllLanguages,
     deselectAllLanguages,
     toggle廣韻字段,
+    updateTheme,
     language,
     updateLanguage,
   } = useApp();
@@ -130,6 +128,33 @@ export default function Settings() {
               }`}
             >
               日本語
+            </button>
+          </div>
+        </section>
+
+        {/* Theme Section */}
+        <section className="mb-4 bg-white p-4 shadow-sm">
+          <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.theme}</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={() => updateTheme('light')}
+              className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                settings.theme === 'light'
+                  ? "bg-[#EB0000] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {t.settings.themeLight}
+            </button>
+            <button
+              onClick={() => updateTheme('dark')}
+              className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                settings.theme === 'dark'
+                  ? "bg-[#EB0000] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {t.settings.themeDark}
             </button>
           </div>
         </section>

@@ -37,6 +37,9 @@ export interface Translations {
   settings: {
     title: string;
     interfaceLanguage: string;
+    theme: string;
+    themeLight: string;
+    themeDark: string;
     displayMode: string;
     displayModeAtlas2: string;
     displayModeYindian: string;
@@ -83,6 +86,9 @@ export const translations: Record<Language, Translations> = {
     settings: {
       title: '設定',
       interfaceLanguage: '界面語言',
+      theme: '主題',
+      themeLight: '淺色',
+      themeDark: '深色',
       displayMode: '顯示方式',
       displayModeAtlas2: '地圖集二',
       displayModeYindian: '音典',
@@ -126,6 +132,9 @@ export const translations: Record<Language, Translations> = {
     settings: {
       title: '设置',
       interfaceLanguage: '界面语言',
+      theme: '主题',
+      themeLight: '浅色',
+      themeDark: '深色',
       displayMode: '显示方式',
       displayModeAtlas2: '地图集二',
       displayModeYindian: '音典',
@@ -169,6 +178,9 @@ export const translations: Record<Language, Translations> = {
     settings: {
       title: 'Settings',
       interfaceLanguage: 'Interface Language',
+      theme: 'Theme',
+      themeLight: 'Light',
+      themeDark: 'Dark',
       displayMode: 'Display Mode',
       displayModeAtlas2: 'Atlas II',
       displayModeYindian: 'Yindian',
@@ -212,6 +224,9 @@ export const translations: Record<Language, Translations> = {
     settings: {
       title: '設定',
       interfaceLanguage: 'インターフェース言語',
+      theme: 'テーマ',
+      themeLight: 'ライト',
+      themeDark: 'ダーク',
       displayMode: '表示方式',
       displayModeAtlas2: '地図集二',
       displayModeYindian: '音典',

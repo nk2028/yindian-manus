@@ -1,20 +1,25 @@
-# 音典网页版 - 调整广韵显示方式样式
+# 音典网页版 - 任务完成列表
 
-## 问题描述
-- [x] 广韵字段选择区域仍然有些宽大
-- [x] 需要与下面语言选择的样式完全匹配
-- [x] 要求更紧凑、更密集的布局(Swiss SBB风格)
+## 任务1: 添加 light/dark theme 切换功能
+- [x] types/index.ts: 添加 theme 类型定义
+- [x] AppContext.tsx: 添加 theme 状态管理
+- [x] Settings.tsx: 添加主题切换UI
+- [x] i18n.ts: 添加主题相关翻译
+- [ ] index.css: 配置 light/dark 主题颜色变量 (待实现CSS变量切换)
+- [ ] 测试主题切换功能
 
-## 任务
-- [x] Settings.tsx: 调整广韵字段选择的样式
-- [x] 减少padding(从 p-2 改为 p-1)
-- [x] 使用更紧凑的网格布局(从 2-6列 改为 3-12列响应式)
-- [x] 与语言选择区域保持一致的视觉密度
+## 任务2: 更新 index.html 元数据
+- [x] 设置默认 lang="zh-HK"
+- [x] 添加 keywords meta 标签
+- [x] 更新 description,删除"采用瑞士SBB设计风格,简洁高效。"
+- [x] 将"2400種語言"改为"千餘種"
 
-## 完成情况
-- ✅ 广韵字段选择区域现在使用与语言选择相同的密集布局
-- ✅ Grid列数: grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12
-- ✅ Padding: p-1 (与语言选择一致)
-- ✅ 视觉密度完全匹配
+## 任务3: 创建 README.md
+- [x] 创建项目 README.md 文件
+- [x] 包含项目简介、功能特点、技术栈等信息
 
-## 所有任务已完成 ✅
+## 任务4: 清理代码注释
+- [x] 删除所有文件头部的 SBB 相关注释
+- [x] App.tsx, LanguageSelector.tsx, AppContext.tsx
+- [x] About.tsx, NotFound.tsx, Query.tsx, Settings.tsx
+- [x] api.ts, dataProcessor.ts, types/index.ts

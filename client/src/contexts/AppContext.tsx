@@ -1,6 +1,3 @@
-// Swiss International Style - App State Management
-// Design: Centralized state for languages and settings
-
 import { processLanguages } from "@/lib/dataProcessor";
 import type {
   DisplayMode,
@@ -8,6 +5,7 @@ import type {
   Language,
   LanguageInfo,
   ProcessedLanguage,
+  Theme,
   UserSettings,
 } from "@/types";
 import {
@@ -33,6 +31,7 @@ interface AppContextValue {
   selectAllLanguages: () => void;
   deselectAllLanguages: () => void;
   toggle廣韻字段: (field: 廣韻字段) => void;
+  updateTheme: (theme: Theme) => void;
   
   // UI language
   language: Language;
@@ -52,6 +51,7 @@ const DEFAULT_SETTINGS: UserSettings = {
   displayMode: "地圖集二",
   selectedLanguages: new Set<number>(),
   廣韻字段: new Set<廣韻字段>(["切韻拼音", "切韻音系描述"]), // Default: 切韻拼音 and 切韻音系描述
+  theme: 'light', // Default theme
 };
 
 const DEFAULT_LANGUAGE: Language = 'zh_HK';
@@ -99,6 +99,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           displayMode: migrateDisplayMode(parsed.displayMode),
           selectedLanguages: new Set(parsed.selectedLanguages || []),
           廣韻字段: new Set<廣韻字段>(parsed.廣韻字段 || parsed.guangyunFields || ["切韻拼音", "切韻音系描述"]),
+          theme: parsed.theme || 'light',
         };
       }
     } catch (e) {
@@ -114,6 +115,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         displayMode: settings.displayMode,
         selectedLanguages: Array.from(settings.selectedLanguages),
         廣韻字段: Array.from(settings.廣韻字段),
+        theme: settings.theme,
       }));
     } catch (e) {
       console.error('Failed to save settings:', e);
@@ -190,6 +192,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const updateTheme = (theme: Theme) => {
+    setSettings((prev) => ({ ...prev, theme }));
+  };
+
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     try {
@@ -210,6 +216,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     selectAllLanguages,
     deselectAllLanguages,
     toggle廣韻字段,
+    updateTheme,
     language,
     updateLanguage: setLanguage,
   };

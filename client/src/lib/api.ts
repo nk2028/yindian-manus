@@ -1,5 +1,3 @@
-// Swiss International Style - API Service
-// Design: Clean, functional data fetching with version caching
 
 import type { ApiResponse, CharacterResult, LanguageInfo } from "@/types";
 

@@ -1,5 +1,3 @@
-// Swiss International Style - Data Processing Utilities
-// Design: Pure functions for data transformation
 
 import type {
   CharacterResult,

@@ -1,5 +1,3 @@
-// Swiss International Style - Yindian Types
-// Design: Functional, clear data structures for ~2400 language varieties
 
 /**
  * API response wrapper with version
@@ -62,6 +60,11 @@ export interface DisplayModeConfig {
  * Language code for UI
  */
 export type Language = 'zh_HK' | 'zh_CN' | 'en_GB' | 'ja';
+
+/**
+ * Theme mode
+ */
+export type Theme = 'light' | 'dark';
 
 /**
  * 廣韻字段名稱
@@ -129,6 +132,7 @@ export interface UserSettings {
   displayMode: DisplayMode;
   selectedLanguages: Set<number>; // Set of language IDs
   廣韻字段: Set<廣韻字段>; // 選中要顯示的廣韻字段
+  theme: Theme; // UI theme (light/dark)
 }
 
 /**
