@@ -1,20 +1,12 @@
-# 音典网页版 - 修复任务
+# 音典网页版 - 更新任务
 
-## 问题1: Dark mode文字颜色
-- [x] 修正Settings.tsx中“語言選擇 (2493/2493)”的文字颜色
-- [x] 在dark mode下应该显示为白色
+## 任务1: 更新查询按钮
+- [x] 将Query.tsx中的“查詢”按钮改为圆形按钮
+- [x] 使用放大镜icon替代文字
+- [x] 添加loading动画效果(保持圆形,animate-spin旋转效果)
 
-## 问题2: README错误的数据来源
-- [x] 删除README中关于ytenx.org的数据来源说明
-- [x] 删除“技術棧”中的“API: ytenx.org API”
-- [x] 删除“數據來源”整个章节
-
-## 问题3: 避免不必要的滚动条
-- [x] 修改CSS避免新开启网页时出现垂直滚动条
-
-## 问题4: index.html title
-- [x] 修改index.html中的title为繁体字
-
-## 问题5: 廣韻默认选项
-- [x] 在AppContext中调整廣韻默认选中字段
-- [x] 默认选中“unt(2022)擬音”和“反切”"
+## 任务2: 更新API数据结构
+- [x] 更新types/index.ts中的LanguageInfo类型定义
+- [x] 在经纬度(索引12)前增加地點字段(索引12)
+- [x] 经纬度索引从12变为13
+- [x] 更新dataProcessor.ts中的coordinates字段索引

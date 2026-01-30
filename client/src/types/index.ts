@@ -9,7 +9,7 @@ export interface ApiResponse<T> {
 
 /**
  * Language information from /list-langs/ API
- * Array format: [語言ID, 語言, 簡稱, 地圖集二排序, 地圖集二顏色, 地圖集二分區, 音典排序, 音典顏色, 音典分區, 陳邡排序, 陳邡顏色, 陳邡分區, 經緯度]
+ * Array format: [語言ID, 語言, 簡稱, 地圖集二排序, 地圖集二顏色, 地圖集二分區, 音典排序, 音典顏色, 音典分區, 陳邡排序, 陳邡顏色, 陳邡分區, 地點, 經緯度]
  */
 export type LanguageInfo = [
   number, // 0: 語言ID
@@ -24,7 +24,8 @@ export type LanguageInfo = [
   number, // 9: 陳邡排序
   string, // 10: 陳邡顏色
   string, // 11: 陳邡分區
-  string, // 12: 經緯度 (coordinates)
+  string, // 12: 地點 (location)
+  string, // 13: 經緯度 (coordinates)
 ];
 
 /**
