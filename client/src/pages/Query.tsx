@@ -1,7 +1,7 @@
 import { queryCharacters } from "@/lib/api";
 import { buildTableRows, parse廣韻字音 } from "@/lib/dataProcessor";
 import type { CharacterResult, ProcessedLanguage, TableRow } from "@/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useApp } from "@/contexts/AppContext";
 import { getTranslation } from "@/lib/i18n";
 import LanguageDetailModal from "@/components/LanguageDetailModal";
@@ -30,28 +30,26 @@ function getTextColor(bgColor: string | null | undefined): string {
 }
 
 export default function Query() {
-  const { processedLanguages, settings, language } = useApp();
+  const { processedLanguages, settings, language, queryInput, setQueryInput, queryResults: contextQueryResults, setQueryResults: setContextQueryResults } = useApp();
   const t = getTranslation(language);
-  const [input, setInput] = useState("");
-  const [queryResults, setQueryResults] = useState<CharacterResult[]>([]);
   const [tableRows, setTableRows] = useState<TableRow[]>([]);
   const [isQuerying, setIsQuerying] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [hasQueried, setHasQueried] = useState(false);
+  const [hasQueried, setHasQueried] = useState(!!contextQueryResults);
   const [selectedLanguage, setSelectedLanguage] = useState<ProcessedLanguage | null>(null);
 
 
   const handleQuery = async () => {
-    if (!input.trim()) return;
+    if (!queryInput.trim()) return;
 
     setIsQuerying(true);
     setError(null);
     setHasQueried(true);
 
     try {
-      const response = await queryCharacters(input.trim());
+      const response = await queryCharacters(queryInput.trim());
       const results = response.data;
-      setQueryResults(results);
+      setContextQueryResults(results);
 
       // Build table rows
       const rows = buildTableRows(
@@ -80,8 +78,20 @@ export default function Query() {
     }
   };
 
+  // Rebuild table rows when contextQueryResults or settings change
+  useEffect(() => {
+    if (contextQueryResults && contextQueryResults.length > 0) {
+      const rows = buildTableRows(
+        contextQueryResults,
+        processedLanguages,
+        settings.selectedLanguages
+      );
+      setTableRows(rows);
+    }
+  }, [contextQueryResults, processedLanguages, settings.selectedLanguages]);
+
   // Extract characters from query results
-  const characters = queryResults.map(([char]) => char);
+  const characters = contextQueryResults ? contextQueryResults.map(([char]: CharacterResult) => char) : [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -91,15 +101,15 @@ export default function Query() {
           <div className="flex gap-2">
             <input
               type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              value={queryInput}
+              onChange={(e) => setQueryInput(e.target.value)}
               onKeyDown={handleKeyPress}
               placeholder={t.query.placeholder}
               className="flex-1 border-2 border-border px-3 py-2 text-base focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 bg-background text-foreground"
             />
             <button
               onClick={handleQuery}
-              disabled={!input.trim() || isQuerying}
+              disabled={!queryInput.trim() || isQuerying}
               className="w-10 h-10 flex items-center justify-center bg-[#EB0000] text-white font-bold hover:bg-[#C50000] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-full flex-shrink-0"
               aria-label={t.query.button}
             >
@@ -158,7 +168,7 @@ export default function Query() {
                   <tr className="bg-[#EB0000] text-white">
                     <th className="border border-border px-2 py-2 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                     </th>
-                    {characters.map((char, idx) => (
+                    {characters.map((char: string, idx: number) => (
                       <th
                         key={idx}
                         className="border border-border px-2 py-2 text-center text-lg font-bold"
@@ -194,7 +204,7 @@ export default function Query() {
                           {row.languageAbbr}
                         </span>
                       </td>
-                      {characters.map((char, charIdx) => {
+                      {characters.map((char: string, charIdx: number) => {
                         let 字音 = row.字音列表[char] || "—";
                         let isHTML = false;
                         // Special handling for Guangyun (廣韻) data

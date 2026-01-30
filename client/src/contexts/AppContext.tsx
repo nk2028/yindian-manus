@@ -36,6 +36,12 @@ interface AppContextValue {
   // UI language
   language: Language;
   updateLanguage: (lang: Language) => void;
+
+  // Query state
+  queryInput: string;
+  setQueryInput: (input: string) => void;
+  queryResults: any | null;
+  setQueryResults: (results: any | null) => void;
 }
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
@@ -77,6 +83,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [rawLanguages, setRawLanguages] = useState<LanguageInfo[]>([]);
   const [isLoadingLanguages, setIsLoadingLanguages] = useState(true);
   const [languagesError, setLanguagesError] = useState<Error | null>(null);
+  const [queryInput, setQueryInput] = useState<string>("");
+  const [queryResults, setQueryResults] = useState<any | null>(null);
   const [language, setLanguageState] = useState<Language>(() => {
     // Try to load language from localStorage with migration
     try {
@@ -219,6 +227,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     updateTheme,
     language,
     updateLanguage: setLanguage,
+    queryInput,
+    setQueryInput,
+    queryResults,
+    setQueryResults,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

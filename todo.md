@@ -1,8 +1,12 @@
-# 音典网页版 - 修改网页标题
+# 音典网页版 - 持久化功能
 
-## 任务: 修改网页第一行标题
-- [x] 将“音典”改为“音典網頁版”
-- [x] 更新zh_HK.ts: nav.title = '音典網頁版'
-- [x] 更新zh_CN.ts: nav.title = '音典网页版'
-- [x] 更新en_GB.ts: nav.title = 'Yindian Web'
-- [x] 更新ja.ts: nav.title = '音典ウェブ版'
+## 任务1: 持久化输入框内容
+- [x] 在AppContext中添加queryInput状态
+- [x] 输入框内容变化时更新context
+- [x] 导航到其他页面再返回时保持输入框内容
+
+## 任务2: 持久化查询结果
+- [x] 在AppContext中添加queryResults状态
+- [x] 查询成功后保存结果到context
+- [x] 导航到设置或关于页面时保持结果
+- [x] 页面刷新或新查询时清空旧结果(新查询会覆盖,页面刷新会重置context)
