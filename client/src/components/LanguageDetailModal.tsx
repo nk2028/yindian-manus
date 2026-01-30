@@ -50,10 +50,6 @@ export default function LanguageDetailModal({ language, onClose }: LanguageDetai
           {/* Language Info */}
           <div className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <span className="font-bold text-foreground min-w-[80px]">{t.settings.displayMode}:</span>
-              <span className="text-foreground">{language.name}</span>
-            </div>
-            <div className="flex items-baseline gap-2">
               <span className="font-bold text-foreground min-w-[80px]">分區:</span>
               <span className="text-foreground">{language.region || '—'}</span>
             </div>

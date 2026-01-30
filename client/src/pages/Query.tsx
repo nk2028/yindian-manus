@@ -161,7 +161,7 @@ export default function Query() {
       {/* Results Table Section */}
       {tableRows.length > 0 && (
         <div className="p-4 flex justify-center">
-          <div className="overflow-x-auto shadow-sm">
+          <div className="overflow-auto shadow-sm max-h-[calc(100vh-200px)]">
             <table className="border-collapse border border-border bg-card">
               <thead className="sticky top-0 z-20">
                 <tr className="bg-[#EB0000] text-white">

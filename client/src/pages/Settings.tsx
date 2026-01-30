@@ -235,7 +235,7 @@ export default function Settings() {
         </section>
 
         {/* Language Selection Section */}
-        <section className="bg-card p-4 shadow-sm">
+        <section className="mb-4 bg-card p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-foreground">
               {t.settings.languageSelection} ({selectedCount}/{totalCount})
