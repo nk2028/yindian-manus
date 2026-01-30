@@ -50,7 +50,7 @@ const DISPLAY_MODE_MIGRATION: Record<string, DisplayMode> = {
 const DEFAULT_SETTINGS: UserSettings = {
   displayMode: "地圖集二",
   selectedLanguages: new Set<number>(),
-  廣韻字段: new Set<廣韻字段>(["切韻拼音", "切韻音系描述"]), // Default: 切韻拼音 and 切韻音系描述
+  廣韻字段: new Set<廣韻字段>(["切韻拼音", "切韻音系描述", "unt(2022)擬音", "反切"]), // Default fields
   theme: 'light', // Default theme
 };
 

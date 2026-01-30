@@ -238,7 +238,7 @@ export default function Settings() {
         {/* Language Selection Section */}
         <section className="bg-card p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-bold text-gray-800">
+            <h2 className="text-lg font-bold text-foreground">
               {t.settings.languageSelection} ({selectedCount}/{totalCount})
             </h2>
             <div className="flex gap-2">

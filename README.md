@@ -18,7 +18,6 @@
 - **UI 組件**: shadcn/ui
 - **路由**: Wouter
 - **構建工具**: Vite
-- **API**: ytenx.org API
 
 ## 項目結構
 
@@ -79,16 +78,11 @@ pnpm preview
 - 發送電郵至: support@nk2028.shn.hk
 - QQ 找綾香
 
-## 數據來源
-
-本項目使用 [ytenx.org](https://ytenx.org/) 提供的 API 獲取漢字讀音數據。
-
 ## 致謝
 
 - Maigo: MCPDict 原作者
 - 漢字音典 APP 開發團隊
 - nk2028: 音典網頁版開發維護
-- ytenx.org: 提供 API 數據支持
 
 ## 許可證
 
