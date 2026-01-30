@@ -1,6 +1,8 @@
-# 音典网页版 - 修夏dark mode边框颜色
+# 音典网页版 - 修改网页标题
 
-## 问题: dark mode下group标题边框颜色错误
-- [x] 设定 > 语言选择中每个group标题的边框上边缘是白色
-- [x] 应该使用border-border语义化颜色
-- [x] 修复Settings.tsx中的边框颜色类从border-gray-200改为border-border
+## 任务: 修改网页第一行标题
+- [x] 将“音典”改为“音典網頁版”
+- [x] 更新zh_HK.ts: nav.title = '音典網頁版'
+- [x] 更新zh_CN.ts: nav.title = '音典网页版'
+- [x] 更新en_GB.ts: nav.title = 'Yindian Web'
+- [x] 更新ja.ts: nav.title = '音典ウェブ版'

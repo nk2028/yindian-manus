@@ -3,7 +3,7 @@ import type { Translations } from '../i18n';
 export const en_GB: Translations = {
   pageTitle: 'Yindian Web - Chinese Character Pronunciation Query Tool',
   nav: {
-    title: 'Yindian',
+    title: 'Yindian Web',
     query: 'Query',
     settings: 'Settings',
     about: 'About',
