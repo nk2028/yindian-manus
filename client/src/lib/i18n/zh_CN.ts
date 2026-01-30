@@ -33,6 +33,10 @@ export const zh_CN: Translations = {
     selectAll: '全选',
     deselectAll: '全不选',
     selectedCount: '已选择 {count} 种语言',
+    clearCache: '清除缓存',
+    clearCacheDesc: '清除所有本地存储的设定和缓存数据',
+    clearCacheButton: '清除缓存',
+    clearCacheConfirm: '确定要清除所有缓存吗？页面将会刷新。',
   },
   about: {
     title: '关于音典',

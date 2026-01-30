@@ -33,6 +33,10 @@ export const en_GB: Translations = {
     selectAll: 'Select All',
     deselectAll: 'Deselect All',
     selectedCount: '{count} languages selected',
+    clearCache: 'Clear Cache',
+    clearCacheDesc: 'Clear all locally stored settings and cached data',
+    clearCacheButton: 'Clear Cache',
+    clearCacheConfirm: 'Are you sure you want to clear all cache? The page will reload.',
   },
   about: {
     title: 'About Yindian',

@@ -33,6 +33,10 @@ export const ja: Translations = {
     selectAll: '全選択',
     deselectAll: '全解除',
     selectedCount: '{count} 言語を選択',
+    clearCache: 'キャッシュをクリア',
+    clearCacheDesc: 'ローカルに保存されたすべての設定とキャッシュデータをクリア',
+    clearCacheButton: 'キャッシュをクリア',
+    clearCacheConfirm: 'すべてのキャッシュをクリアしますか？ページがリロードされます。',
   },
   about: {
     title: '音典について',

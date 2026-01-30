@@ -94,7 +94,7 @@ export default function Query() {
   const characters = contextQueryResults ? contextQueryResults.map(([char]: CharacterResult) => char) : [];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       {/* Query Input Section */}
       <div className="bg-card p-3 shadow-sm">
         <div className="max-w-7xl mx-auto">
@@ -160,23 +160,22 @@ export default function Query() {
 
       {/* Results Table Section */}
       {tableRows.length > 0 && (
-        <div className="p-4">
-          <div className="max-w-full mx-auto">
-            <div className="overflow-x-auto shadow-sm">
-              <table className="border-collapse border border-border bg-card">
-                <thead>
-                  <tr className="bg-[#EB0000] text-white">
-                    <th className="border border-border px-2 py-2 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+        <div className="p-4 flex justify-center">
+          <div className="overflow-x-auto shadow-sm">
+            <table className="border-collapse border border-border bg-card">
+              <thead className="sticky top-0 z-20">
+                <tr className="bg-[#EB0000] text-white">
+                  <th className="border border-border px-2 py-1 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-30" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                     </th>
-                    {characters.map((char: string, idx: number) => (
-                      <th
-                        key={idx}
-                        className="border border-border px-2 py-2 text-center text-lg font-bold"
-                        style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
-                      >
-                        {char}
-                      </th>
-                    ))}
+                  {characters.map((char: string, idx: number) => (
+                    <th
+                      key={idx}
+                      className="border border-border px-2 py-1 text-center text-lg font-bold"
+                      style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
+                    >
+                      {char}
+                    </th>
+                  ))}
                   </tr>
                 </thead>
                 <tbody>
@@ -186,7 +185,7 @@ export default function Query() {
                       key={row.languageId}
                       className="hover:bg-secondary transition-colors"
                     >
-                      <td className="border border-border px-2 py-2 bg-card sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+                      <td className="border border-border px-2 py-1 bg-card sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                         <span
                           className="inline-block px-2 py-1 text-sm font-bold cursor-pointer hover:opacity-80 transition-opacity"
                           style={{ 
@@ -218,7 +217,7 @@ export default function Query() {
                           return (
                             <td
                               key={`char-${charIdx}`}
-                              className="border border-border px-2 py-2 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
+                              className="border border-border px-2 py-1 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
                               style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                               dangerouslySetInnerHTML={{ __html: 字音 }}
                             />
@@ -228,7 +227,7 @@ export default function Query() {
                         return (
                           <td
                             key={`char-${charIdx}`}
-                            className="border border-border px-2 py-2 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
+                            className="border border-border px-2 py-1 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
                             style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                           >
                             {字音}
@@ -240,12 +239,11 @@ export default function Query() {
                   })}
                 </tbody>
               </table>
-            </div>
-            <div className="mt-2 text-sm text-muted-foreground font-medium">
-              共 {tableRows.length} 种语言
+              <div className="mt-2 text-sm text-muted-foreground font-medium">
+                共 {tableRows.length} 种语言
+              </div>
             </div>
           </div>
-        </div>
       )}
 
       {/* Empty State */}

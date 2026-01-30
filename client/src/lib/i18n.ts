@@ -55,6 +55,10 @@ export interface Translations {
     selectAll: string;
     deselectAll: string;
     selectedCount: string;
+    clearCache: string;
+    clearCacheDesc: string;
+    clearCacheButton: string;
+    clearCacheConfirm: string;
   };
   
   // About page

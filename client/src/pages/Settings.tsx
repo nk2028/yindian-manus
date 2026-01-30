@@ -184,7 +184,6 @@ export default function Settings() {
           <div className="flex items-center justify-between mb-3">
             <div>
               <h2 className="text-lg font-bold text-foreground">{t.settings.guangyunDisplay}</h2>
-              <p className="text-sm text-muted-foreground mt-1">{t.settings.guangyunDisplayDesc}</p>
             </div>
             <div className="flex gap-2">
               <button
@@ -302,6 +301,27 @@ export default function Settings() {
               </div>
             );
             })}
+          </div>
+        </section>
+
+        {/* Clear Cache Section */}
+        <section className="mb-4 bg-card p-4 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-bold text-foreground">{t.settings.clearCache}</h2>
+              <p className="text-sm text-muted-foreground mt-1">{t.settings.clearCacheDesc}</p>
+            </div>
+            <button
+              onClick={() => {
+                if (confirm(t.settings.clearCacheConfirm)) {
+                  localStorage.clear();
+                  window.location.reload();
+                }
+              }}
+              className="px-4 py-2 text-sm font-medium bg-[#EB0000] text-white hover:bg-[#C50000] transition-colors rounded-full"
+            >
+              {t.settings.clearCacheButton}
+            </button>
           </div>
         </section>
       </div>
