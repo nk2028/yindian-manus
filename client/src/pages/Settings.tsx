@@ -274,7 +274,7 @@ export default function Settings() {
               const regionColor = languages[0]?.color || '#EB0000';
               const textColor = getTextColor(regionColor);
               return (
-              <div key={region} className="border-b border-gray-200 last:border-b-0">
+              <div key={region} className="border-b border-border last:border-b-0">
                 <div
                   className="text-xs font-bold px-2 py-1 sticky top-0 z-10"
                   style={{ backgroundColor: regionColor, color: textColor }}

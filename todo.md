@@ -1,8 +1,6 @@
-# 音典网页版 - 修复无限刷新bug
+# 音典网页版 - 修夏dark mode边框颜色
 
-## 问题: 版本比较类型不匹配
-- [x] cachedVersion是string类型(从localStorage读取)
-- [x] version是string类型(API返回),但可能被解析为其他类型
-- [x] 使用String()显式转换确保类型一致
-- [x] 修复fetchLanguages和queryCharacters中的版本比较
-- [x] 避免无限刷新
+## 问题: dark mode下group标题边框颜色错误
+- [x] 设定 > 语言选择中每个group标题的边框上边缘是白色
+- [x] 应该使用border-border语义化颜色
+- [x] 修复Settings.tsx中的边框颜色类从border-gray-200改为border-border
