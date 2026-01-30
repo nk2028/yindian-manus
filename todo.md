@@ -1,17 +1,15 @@
-# 音典网页版 - 所有任务已完成
+# 音典网页版 - 所有修复已完成
 
-## 任务1: 修复字体路径和删除调试代码
-- [x] index.css: 修改字体路径为相对路径(./fonts/)
-- [x] Query.tsx: 删除调试代码(__DEBUG_TABLE_ROWS)
+## 问题1: dark theme 持久化问题
+- [x] 移除 App.tsx 中 ThemeProvider 的硬编码 defaultTheme
+- [x] 确保 localStorage 中的 theme 值正确读取和应用
+- [x] 测试刷新后 theme 状态是否一致
 
-## 任务2: 优化设置UI样式
-- [x] Settings.tsx: 移除语言选择的滚动条限制(max-h-[600px] overflow-y-auto)
-- [x] Settings.tsx: 移除广韵显示方式表格的白边(border-gray-300 → border-border)
+## 问题2: 设置页面 dark mode 样式
+- [x] 修复 Settings.tsx 中语言选择区域的白色背景
+- [x] 将 bg-white 改为 bg-card
+- [x] 测试 dark mode 下的显示效果
 
-## 任务3: 修复查询结果表格样式
-- [x] Query.tsx: 移除表格第一行第一列的"語言"文字
-- [x] Query.tsx: 修复dark mode下表格边框颜色(border-gray-300 → border-border)
-
-## 任务4: 测试并发布
-- [x] 所有修复已完成
-- [x] 准备创建最终检查点
+## 问题3: 广韵表格边框
+- [x] 移除 Settings.tsx 中广韵显示方式表格的外层边框
+- [x] 测试移除边框后的显示效果

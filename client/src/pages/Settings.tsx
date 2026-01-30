@@ -215,8 +215,7 @@ export default function Settings() {
           </div>
 
           {/* Guangyun Fields Grid */}
-          <div className="border border-border">
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12">
               {廣韻字段列表.map((field) => (
                 <label
                   key={field}
@@ -233,12 +232,11 @@ export default function Settings() {
                   </span>
                 </label>
               ))}
-            </div>
           </div>
         </section>
 
         {/* Language Selection Section */}
-        <section className="bg-white p-4 shadow-sm">
+        <section className="bg-card p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-800">
               {t.settings.languageSelection} ({selectedCount}/{totalCount})
