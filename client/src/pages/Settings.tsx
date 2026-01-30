@@ -65,11 +65,11 @@ export default function Settings() {
       }
       groups.get(region)!.push(lang);
     });
-    // Sort by minimum language ID in each region
+    // Sort by minimum sortOrder in each region (sortOrder is already based on current display mode)
     return Array.from(groups.entries()).sort(([, a], [, b]) => {
-      const minIdA = Math.min(...a.map(lang => lang.id));
-      const minIdB = Math.min(...b.map(lang => lang.id));
-      return minIdA - minIdB;
+      const minSortOrderA = Math.min(...a.map(lang => lang.sortOrder));
+      const minSortOrderB = Math.min(...b.map(lang => lang.sortOrder));
+      return minSortOrderA - minSortOrderB;
     });
   }, [filteredLanguages]);
 

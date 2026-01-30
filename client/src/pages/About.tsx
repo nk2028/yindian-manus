@@ -31,6 +31,37 @@ export default function About() {
                 <li>{t.about.feature4}</li>
               </ul>
             </div>
+
+            <div>
+              <h3 className="font-bold text-lg mb-2 text-foreground">{t.about.github}</h3>
+              <ul className="list-disc list-inside space-y-1.5 ml-4">
+                <li>{t.about.githubFrontend}: <a href="https://github.com/nk2028/yindian" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/nk2028/yindian</a></li>
+                <li>{t.about.githubBackend}: <a href="https://github.com/nk2028/yindian-server" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/nk2028/yindian-server</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-lg mb-2 text-foreground">{t.about.relatedProjects}</h3>
+              <ul className="list-disc list-inside space-y-1.5 ml-4">
+                <li><a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.relatedApp}</a></li>
+                <li><a href="https://mcpdict.vear.vip/" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.relatedWeiEr}</a> (<a href="https://github.com/vearvip/mcpdict-frontend" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.githubFrontend}</a>、<a href="https://github.com/vearvip/mcpdict-backend" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.githubBackend}</a>)</li>
+                <li><a href="https://dialects.yzup.top" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.relatedBuJi}</a> (<a href="https://github.com/jengzang/dialects-js-frontend" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.githubFrontend}</a>、<a href="https://github.com/jengzang/dialects-backend" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">{t.about.githubBackend}</a>)</li>
+              </ul>
+            </div>
+
+            <p>
+              {t.about.iconCredit} <a href="https://github.com/ayaka14732" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/ayaka14732</a>
+            </p>
+
+            <div>
+              <h3 className="font-bold text-lg mb-2 text-foreground">{t.about.feedback}</h3>
+              <ul className="list-disc list-inside space-y-1.5 ml-4">
+                <li>{t.about.feedbackGithub}: <a href="https://github.com/nk2028/yindian/issues" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/nk2028/yindian/issues</a></li>
+                <li>{t.about.feedbackTelegram}: <a href="https://t.me/nk2028" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://t.me/nk2028</a></li>
+                <li>{t.about.feedbackEmail}: <a href="mailto:support@nk2028.shn.hk" className="text-[#EB0000] hover:underline">support@nk2028.shn.hk</a></li>
+                <li>{t.about.feedbackQQ}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
