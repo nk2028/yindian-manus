@@ -146,6 +146,7 @@ export interface ProcessedLanguage {
   sortOrder: number;
   color: string;
   region: string;
+  location: string;
   coordinates: string;
 }
 

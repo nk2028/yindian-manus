@@ -47,6 +47,7 @@ export function processLanguages(
     sortOrder: lang[config.sortIndex] as number,
     color: lang[config.colorIndex] as string,
     region: lang[config.regionIndex] as string,
+    location: String(lang[12] || ""),
     coordinates: String(lang[13] || ""),
   }));
 }

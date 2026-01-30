@@ -1,9 +1,10 @@
 import { queryCharacters } from "@/lib/api";
 import { buildTableRows, parse廣韻字音 } from "@/lib/dataProcessor";
-import type { CharacterResult, TableRow } from "@/types";
+import type { CharacterResult, ProcessedLanguage, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
 import { getTranslation } from "@/lib/i18n";
+import LanguageDetailModal from "@/components/LanguageDetailModal";
 
 
 // Calculate text color (black or white) based on background color brightness
@@ -37,6 +38,7 @@ export default function Query() {
   const [isQuerying, setIsQuerying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasQueried, setHasQueried] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<ProcessedLanguage | null>(null);
 
 
   const handleQuery = async () => {
@@ -183,12 +185,11 @@ export default function Query() {
                           }}
                           onClick={() => {
                             const lang = processedLanguages.find(l => l.id === row.languageId);
-                            if (lang && lang.coordinates) {
-                              const [lng, lat] = lang.coordinates.split(',');
-                              window.open(`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=12/${lat}/${lng}`, '_blank');
+                            if (lang) {
+                              setSelectedLanguage(lang);
                             }
                           }}
-                          title="點擊查看地理位置"
+                          title="點擊查看詳情"
                         >
                           {row.languageAbbr}
                         </span>
@@ -249,7 +250,11 @@ export default function Query() {
         </div>
       )}
 
-
+      {/* Language Detail Modal */}
+      <LanguageDetailModal 
+        language={selectedLanguage}
+        onClose={() => setSelectedLanguage(null)}
+      />
     </div>
   );
 }
