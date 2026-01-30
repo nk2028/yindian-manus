@@ -2,8 +2,8 @@
 @font-face {
   font-family: 'Charis SIL';
   src: local('Charis SIL'), 
-       url('./assets/fonts/CharisSIL-Regular.woff2') format('woff2'), 
-       url('./assets/fonts/CharisSIL-Regular.ttf') format('truetype');
+       url('./assets/fonts/CharisSIL/CharisSIL-Regular.woff2') format('woff2'), 
+       url('./assets/fonts/CharisSIL/CharisSIL-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -11,8 +11,8 @@
 @font-face {
   font-family: 'Charis SIL';
   src: local('Charis SIL Italic'), 
-       url('./assets/fonts/CharisSIL-Italic.woff2') format('woff2'), 
-       url('./assets/fonts/CharisSIL-Italic.ttf') format('truetype');
+       url('./assets/fonts/CharisSIL/CharisSIL-Italic.woff2') format('woff2'), 
+       url('./assets/fonts/CharisSIL/CharisSIL-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
 }
@@ -20,8 +20,8 @@
 @font-face {
   font-family: 'Charis SIL';
   src: local('Charis SIL Bold'), 
-       url('./assets/fonts/CharisSIL-Bold.woff2') format('woff2'), 
-       url('./assets/fonts/CharisSIL-Bold.ttf') format('truetype');
+       url('./assets/fonts/CharisSIL/CharisSIL-Bold.woff2') format('woff2'), 
+       url('./assets/fonts/CharisSIL/CharisSIL-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -29,8 +29,8 @@
 @font-face {
   font-family: 'Charis SIL';
   src: local('Charis SIL Bold Italic'), 
-       url('./assets/fonts/CharisSIL-BoldItalic.woff2') format('woff2'), 
-       url('./assets/fonts/CharisSIL-BoldItalic.ttf') format('truetype');
+       url('./assets/fonts/CharisSIL/CharisSIL-BoldItalic.woff2') format('woff2'), 
+       url('./assets/fonts/CharisSIL/CharisSIL-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
 }

@@ -39,7 +39,7 @@ export const zh_CN: Translations = {
     clearCacheConfirm: '确定要清除所有缓存吗？页面将会刷新。',
   },
   about: {
-    title: '关于音典',
+    title: '关于音典网页版',
     intro: '汉字音典（Yindian）是全面收集汉字读音的资料库。它源自 Maigo 制作的 MCPDict，是最早的汉字读音查询工具之一。',
     history: '此后，由众多专家联手，不断收集整理大量汉字读音资料，制作了汉字音典 APP。nk2028 基于汉字音典 APP 发布了音典网页版，让更多使用者能够方便地查询汉字在不同时代、不同地区的读音。目前音典网页版收录了千余种语言变体，涵盖上古音、中古音、近代音及现代各地方言。',
     features: '主要功能',

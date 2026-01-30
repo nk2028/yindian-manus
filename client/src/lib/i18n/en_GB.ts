@@ -39,7 +39,7 @@ export const en_GB: Translations = {
     clearCacheConfirm: 'Are you sure you want to clear all cache? The page will reload.',
   },
   about: {
-    title: 'About Yindian',
+    title: 'About Yindian Web',
     intro: 'Yindian (Chinese Character Phonetic Dictionary) is a comprehensive database collecting Chinese character pronunciations. It originated from MCPDict created by Maigo, one of the earliest Chinese character pronunciation query tools.',
     history: 'Subsequently, numerous experts collaborated to continuously collect and organize extensive Chinese character pronunciation data, creating the Yindian mobile app. nk2028 released the Yindian web version based on the Yindian app, enabling more users to conveniently query Chinese character pronunciations across different historical periods and regions. Currently, the Yindian web version includes over a thousand language variants, covering Old Chinese, Middle Chinese, Early Mandarin, and modern regional dialects.',
     features: 'Key Features',
