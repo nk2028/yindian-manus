@@ -185,7 +185,7 @@ export default function Query() {
                       key={row.languageId}
                       className="hover:bg-secondary transition-colors"
                     >
-                      <td className="border border-border px-2 py-1 bg-card sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+                      <td className="border border-border px-2 py-1 bg-card sticky left-0 z-20" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                         <span
                           className="inline-block px-2 py-1 text-sm font-bold cursor-pointer hover:opacity-80 transition-opacity"
                           style={{ 

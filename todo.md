@@ -1,7 +1,16 @@
-# 音典网页版 - 添加SBB Web字体
+# 音典网页版 - 清理和修复
 
-## 任务: 添加SBB Web字体并应用为主要英文字体
-- [x] 创建fonts/SBBWeb_v1_9目录
-- [x] 复制字体文件到目录(Thin, Light, Roman, Bold)
-- [x] 在fonts.css中添加@font-face声明
-- [x] 更新index.css中的字体栈为"SBB", "Helvetica Neue", Helvetica, Arial, sans-serif
+## 任务1: 删除migration相关代码
+- [x] 搜索所有migration相关代码
+- [x] 删除DISPLAY_MODE_MIGRATION
+- [x] 删除LANGUAGE_MIGRATION
+- [x] 删除migrateDisplayMode和migrateLanguage函数
+- [x] 简化localStorage读取逻辑
+
+## 任务2: 修改nav标题
+- [x] 将“音典網頁版”改回“音典”(所有语言)
+- [x] 为英文标题添加letter-spacing([:lang(en)_&]:tracking-wide)
+
+## 任务3: 修复表格sticky z-index
+- [x] 修复第一列sticky时的z-index从z-10改为z-20
+- [x] 确保第二列滚动时正确隐藏在第一列后面

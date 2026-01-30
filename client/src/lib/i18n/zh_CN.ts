@@ -3,7 +3,7 @@ import type { Translations } from '../i18n';
 export const zh_CN: Translations = {
   pageTitle: '音典网页版 - 汉字语音查询工具',
   nav: {
-    title: '音典网页版',
+    title: '音典',
     query: '查字',
     settings: '设定',
     about: '关于',

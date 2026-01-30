@@ -28,7 +28,7 @@ function Navigation() {
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center gap-2">
             <img src="/yindian-icon.svg" alt="音典" className="w-8 h-8 invert" />
-            <span className="text-xl font-bold tracking-tight">{t.nav.title}</span>
+            <span className="text-xl font-bold tracking-tight [:lang(en)_&]:tracking-wide">{t.nav.title}</span>
           </div>
           <div className="flex gap-2">
             {navItems.map((item) => (

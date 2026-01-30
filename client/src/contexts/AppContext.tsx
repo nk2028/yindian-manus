@@ -46,13 +46,6 @@ interface AppContextValue {
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
 
-// Migration map for old displayMode values
-const DISPLAY_MODE_MIGRATION: Record<string, DisplayMode> = {
-  atlas2: "地圖集二",
-  yindian: "音典",
-  chenfang: "陳邡",
-};
-
 const DEFAULT_SETTINGS: UserSettings = {
   displayMode: "地圖集二",
   selectedLanguages: new Set<number>(),
@@ -62,22 +55,7 @@ const DEFAULT_SETTINGS: UserSettings = {
 
 const DEFAULT_LANGUAGE: Language = 'zh_HK';
 
-// Migrate old displayMode value if needed
-function migrateDisplayMode(mode: string): DisplayMode {
-  return (DISPLAY_MODE_MIGRATION[mode] as DisplayMode) || mode as DisplayMode;
-}
 
-// Migration map for old language codes
-const LANGUAGE_MIGRATION: Record<string, Language> = {
-  '香港': 'zh_HK',
-  '中国': 'zh_CN',
-  'en': 'en_GB',
-};
-
-// Migrate old language code if needed
-function migrateLanguage(lang: string): Language {
-  return (LANGUAGE_MIGRATION[lang] as Language) || lang as Language;
-}
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [rawLanguages, setRawLanguages] = useState<LanguageInfo[]>([]);
@@ -86,11 +64,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [queryInput, setQueryInput] = useState<string>("");
   const [queryResults, setQueryResults] = useState<any | null>(null);
   const [language, setLanguageState] = useState<Language>(() => {
-    // Try to load language from localStorage with migration
+    // Try to load language from localStorage
     try {
       const saved = localStorage.getItem('yindian-language');
       if (saved) {
-        return migrateLanguage(saved);
+        return saved as Language;
       }
     } catch (e) {
       console.error('Failed to load language:', e);
@@ -98,15 +76,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return DEFAULT_LANGUAGE;
   });
   const [settings, setSettings] = useState<UserSettings>(() => {
-    // Try to load settings from localStorage with migration
+    // Try to load settings from localStorage
     try {
       const saved = localStorage.getItem('yindian-settings');
       if (saved) {
         const parsed = JSON.parse(saved);
         return {
-          displayMode: migrateDisplayMode(parsed.displayMode),
+          displayMode: parsed.displayMode as DisplayMode,
           selectedLanguages: new Set(parsed.selectedLanguages || []),
-          廣韻字段: new Set<廣韻字段>(parsed.廣韻字段 || parsed.guangyunFields || ["切韻拼音", "切韻音系描述"]),
+          廣韻字段: new Set<廣韻字段>(parsed.廣韻字段 || ["切韻拼音", "切韻音系描述"]),
           theme: parsed.theme || 'light',
         };
       }

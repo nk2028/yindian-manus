@@ -3,7 +3,7 @@ import type { Translations } from '../i18n';
 export const ja: Translations = {
   pageTitle: '音典ウェブ版 - 漢字音声検索ツール',
   nav: {
-    title: '音典ウェブ版',
+    title: '音典',
     query: 'Query',
     settings: 'Settings',
     about: 'About',
