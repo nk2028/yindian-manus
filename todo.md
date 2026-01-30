@@ -1,6 +1,6 @@
-# 音典网页版 - 修正经纬度顺序
+# 音典网页版 - 修正字体路径
 
-## 问题: 地图显示不出来
-- [x] 数据格式是“经度,纬度”(lng,lat)
-- [x] 但OpenStreetMap URL需要“纬度,经度”(lat,lng)
-- [x] 修正LanguageDetailModal中的坐标解析顺序
+## 问题: Vite构建时字体路径警告
+- [x] 字体文件位于 client/public/fonts/
+- [x] 修改fonts.css中的路径从 ./fonts/ 改为 /fonts/
+- [x] 使用绝对路径引用public目录中的字体文件
