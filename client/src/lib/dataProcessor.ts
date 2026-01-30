@@ -72,16 +72,20 @@ export function buildTableRows(
 
   // Collect all pronunciations
   queryResults.forEach(([char, pronunciations]) => {
-    pronunciations.forEach(([langId, pronunciation]) => {
+    pronunciations.forEach(([langId, pronunciation, note]) => {
       if (!langToPronunciations.has(langId)) {
         langToPronunciations.set(langId, {});
       }
       const langPronuns = langToPronunciations.get(langId)!;
+      
+      // Format: pronunciation (note) if note exists, otherwise just pronunciation
+      const displayText = note ? `${pronunciation} (${note})` : pronunciation;
+      
       // If this language already has a pronunciation for this character, append with separator
       if (langPronuns[char]) {
-        langPronuns[char] += '; ' + pronunciation;
+        langPronuns[char] += '; ' + displayText;
       } else {
-        langPronuns[char] = pronunciation;
+        langPronuns[char] = displayText;
       }
     });
   });

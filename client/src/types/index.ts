@@ -31,13 +31,16 @@ export type LanguageInfo = [
 
 /**
  * Character pronunciation data
- * Format: [langId, pronunciation]
+ * Format: [langId, pronunciation, note?]
+ * - langId: Language ID
+ * - pronunciation: Pronunciation string
+ * - note: Optional note/comment (註釋), useful for distinguishing multiple pronunciations
  */
-export type Pronunciation = [number, string];
+export type Pronunciation = [number, string, string?];
 
 /**
  * Character query result
- * Format: [character, [[langId, pronunciation], ...]]
+ * Format: [character, [[langId, pronunciation, note?], ...]]
  */
 export type CharacterResult = [string, Pronunciation[]];
 
