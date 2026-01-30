@@ -1,15 +1,63 @@
 // Swiss International Style - API Service
-// Design: Clean, functional data fetching
+// Design: Clean, functional data fetching with version caching
 
-import type { CharacterResult, LanguageInfo } from "@/types";
+import type { ApiResponse, CharacterResult, LanguageInfo } from "@/types";
 
 const API_BASE = "https://1305783649-j61pduj0mx.ap-guangzhou.tencentscf.com";
+const VERSION_CACHE_KEY = "yindian_api_version";
+const LANGUAGES_CACHE_KEY = "yindian_languages_cache";
 
 /**
- * Fetch all language information
- * Called once on page load
+ * Get cached API version
  */
-export async function fetchLanguages(): Promise<LanguageInfo[]> {
+function getCachedVersion(): string | null {
+  try {
+    return localStorage.getItem(VERSION_CACHE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Set cached API version
+ */
+function setCachedVersion(version: string): void {
+  try {
+    localStorage.setItem(VERSION_CACHE_KEY, version);
+  } catch (error) {
+    console.error("Failed to cache version:", error);
+  }
+}
+
+/**
+ * Get cached languages data
+ */
+function getCachedLanguages(): LanguageInfo[] | null {
+  try {
+    const cached = localStorage.getItem(LANGUAGES_CACHE_KEY);
+    if (!cached) return null;
+    return JSON.parse(cached) as LanguageInfo[];
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Set cached languages data
+ */
+function setCachedLanguages(languages: LanguageInfo[]): void {
+  try {
+    localStorage.setItem(LANGUAGES_CACHE_KEY, JSON.stringify(languages));
+  } catch (error) {
+    console.error("Failed to cache languages:", error);
+  }
+}
+
+/**
+ * Fetch all language information with version checking
+ * Called once on page load and when version mismatch is detected
+ */
+export async function fetchLanguages(forceRefresh = false): Promise<LanguageInfo[]> {
   try {
     const response = await fetch(`${API_BASE}/list-langs/`, {
       method: "GET",
@@ -22,21 +70,51 @@ export async function fetchLanguages(): Promise<LanguageInfo[]> {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    const data = await response.json();
-    return data as LanguageInfo[];
+    const apiResponse = await response.json() as ApiResponse<LanguageInfo[]>;
+    const { version, data } = apiResponse;
+    
+    // Check if we need to update cache
+    const cachedVersion = getCachedVersion();
+    
+    if (forceRefresh || !cachedVersion || cachedVersion !== version) {
+      console.log(`Version mismatch or force refresh. Cached: ${cachedVersion}, API: ${version}`);
+      setCachedVersion(version);
+      setCachedLanguages(data);
+      return data;
+    }
+    
+    // Use cached data if version matches
+    const cachedLanguages = getCachedLanguages();
+    if (cachedLanguages) {
+      console.log("Using cached languages data");
+      return cachedLanguages;
+    }
+    
+    // Fallback: cache and return API data
+    setCachedVersion(version);
+    setCachedLanguages(data);
+    return data;
   } catch (error) {
     console.error("Failed to fetch languages:", error);
+    
+    // Try to use cached data as fallback
+    const cachedLanguages = getCachedLanguages();
+    if (cachedLanguages) {
+      console.warn("Using cached languages as fallback");
+      return cachedLanguages;
+    }
+    
     throw error;
   }
 }
 
 /**
- * Query character pronunciations
+ * Query character pronunciations with version checking
  * @param chars - Chinese characters to query (no spaces)
  */
 export async function queryCharacters(
   chars: string
-): Promise<CharacterResult[]> {
+): Promise<{ version: string; data: CharacterResult[] }> {
   try {
     const url = `${API_BASE}/chars/?chars=${encodeURIComponent(chars)}`;
     console.log("Fetching:", url);
@@ -52,9 +130,18 @@ export async function queryCharacters(
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    const data = await response.json();
-    console.log("Query result:", data);
-    return data as CharacterResult[];
+    const apiResponse = await response.json() as ApiResponse<CharacterResult[]>;
+    console.log("Query result:", apiResponse);
+    
+    // Check version and trigger language refresh if needed
+    const cachedVersion = getCachedVersion();
+    if (cachedVersion && cachedVersion !== apiResponse.version) {
+      console.log(`Version mismatch detected. Cached: ${cachedVersion}, API: ${apiResponse.version}`);
+      // Trigger background refresh of languages
+      fetchLanguages(true).catch(console.error);
+    }
+    
+    return apiResponse;
   } catch (error) {
     console.error("Failed to query characters:", error);
     throw error;

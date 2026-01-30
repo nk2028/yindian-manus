@@ -12,7 +12,7 @@ import Query from "./pages/Query";
 import Settings from "./pages/Settings";
 import About from "./pages/About";
 import { getTranslation, type Language } from "./lib/i18n";
-import LanguageSelector from "./components/LanguageSelector";
+
 
 function Navigation() {
   const [location] = useLocation();
@@ -33,23 +33,20 @@ function Navigation() {
             <img src="/yindian-icon.svg" alt="音典" className="w-8 h-8 invert" />
             <span className="text-xl font-bold tracking-tight">{t.nav.title}</span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex gap-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`px-4 py-2 text-sm font-medium transition-colors rounded-full ${
-                    location === item.path
-                      ? "bg-white text-[#EB0000]"
-                      : "text-white hover:bg-gray-200 hover:text-gray-800"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <LanguageSelector value={language} onChange={setLanguage} />
+          <div className="flex gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`px-4 py-2 text-sm font-medium transition-colors rounded-full ${
+                  location === item.path
+                    ? "bg-white text-[#EB0000]"
+                    : "text-white hover:bg-gray-200 hover:text-gray-800"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
