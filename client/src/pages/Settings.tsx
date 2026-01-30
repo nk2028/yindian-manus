@@ -191,11 +191,11 @@ export default function Settings() {
 
           {/* Guangyun Fields Grid */}
           <div className="border border-gray-300">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12">
               {廣韻字段列表.map((field) => (
                 <label
                   key={field}
-                  className="flex items-start gap-1 p-2 hover:bg-gray-50 cursor-pointer border-r border-b border-gray-100 text-xs leading-tight"
+                  className="flex items-start gap-1 p-1 hover:bg-gray-50 cursor-pointer border-r border-b border-gray-100 text-xs leading-tight"
                 >
                   <input
                     type="checkbox"
