@@ -1,27 +1,19 @@
 # 音典网页版 - 所有任务已完成
 
-## 任务1: 修复 dark theme 背景色问题
-- [x] Settings.tsx: 移除 `bg-gray-50` 硬编码,改为 `bg-background`
-- [x] Query.tsx: 检查并移除硬编码背景色
-- [x] About.tsx: 检查并移除硬编码背景色
-- [x] 测试 dark theme 切换功能
+## 任务1: 实现 /list-langs/ 本地缓存和版本检查
+- [x] api.ts 已实现完整的本地存储缓存逻辑
+- [x] 已实现版本检查机制(version mismatch 时自动刷新)
+- [x] 测试缓存功能正常工作
 
-## 任务2: 重构 pronunciation 为字音
-- [x] types/index.ts: 重命名 Pronunciation 相关类型为 字音數據
-- [x] dataProcessor.ts: 重构所有 pronunciation 变量名为 字音
-- [x] Query.tsx: 重构所有 pronunciation 变量名为 字音
-- [x] TableRow: 重命名 pronunciations 字段为 字音列表
+## 任务2: 添加 Charis SIL 字体文件和CSS样式
+- [x] 解压字体文件到 client/public/fonts/
+- [x] 在 index.css 中添加 @font-face 定义(4个字体变体)
+- [x] 添加 :lang(zh-Latn), :lang(zh-Cyrl), :lang(zh-Latn-fonipa) 样式
+- [x] 测试字体加载成功(4个字体文件已加载)
+- [x] 验证 lang 属性正确应用到广韵数据
 
-## 任务3: 实现广韵字段类型标记和格式化显示
-- [x] 添加广韵字段类型标记: 'lllliiiiiiiiiiiiiih#hhhh'
-- [x] dataProcessor.ts: 实现 wrapIPA 函数
-- [x] dataProcessor.ts: 实现 wrapRomanization 函数
-- [x] 在 parse廣韻字音 中应用格式化(根据字段类型包装 HTML)
-- [x] Query.tsx: 使用 dangerouslySetInnerHTML 渲染广韵 HTML 标签
-- [x] 修复 React 错误: 不能同时使用 children 和 dangerouslySetInnerHTML
-
-## 任务4: 测试并发布
-- [x] 测试 dark theme 切换
-- [x] 测试字音变量重构
-- [x] 测试广韵字段格式化显示(「率」字显示两个读音)
+## 任务3: 测试并发布
+- [x] 测试 /list-langs/ 缓存功能
+- [x] 测试 Charis SIL 字体显示
+- [x] 验证广韵数据的 HTML lang 属性
 - [x] 创建最终检查点
