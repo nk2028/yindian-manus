@@ -79,22 +79,22 @@ export default function Settings() {
   const totalCount = processedLanguages.length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4 text-[#EB0000] pb-3 border-b-2 border-[#EB0000]">
           {t.settings.title}
         </h1>
 
         {/* Interface Language Section */}
-        <section className="mb-4 bg-white p-4 shadow-sm">
-          <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.interfaceLanguage}</h2>
+        <section className="mb-4 bg-card p-4 shadow-sm">
+          <h2 className="text-lg font-bold mb-3 text-foreground">{t.settings.interfaceLanguage}</h2>
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => updateLanguage('zh_HK')}
               className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                 language === 'zh_HK'
                   ? "bg-[#EB0000] text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
+                  : "bg-card text-card-foreground hover:bg-secondary"
               }`}
             >
               中文(繁體)
@@ -104,7 +104,7 @@ export default function Settings() {
               className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                 language === 'zh_CN'
                   ? "bg-[#EB0000] text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
+                  : "bg-card text-card-foreground hover:bg-secondary"
               }`}
             >
               中文(简体)
@@ -114,7 +114,7 @@ export default function Settings() {
               className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                 language === 'en_GB'
                   ? "bg-[#EB0000] text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
+                  : "bg-card text-card-foreground hover:bg-secondary"
               }`}
             >
               English
@@ -124,7 +124,7 @@ export default function Settings() {
               className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                 language === 'ja'
                   ? "bg-[#EB0000] text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
+                  : "bg-card text-card-foreground hover:bg-secondary"
               }`}
             >
               日本語
@@ -133,15 +133,15 @@ export default function Settings() {
         </section>
 
         {/* Theme Section */}
-        <section className="mb-4 bg-white p-4 shadow-sm">
-          <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.theme}</h2>
+        <section className="mb-4 bg-card p-4 shadow-sm">
+          <h2 className="text-lg font-bold mb-3 text-foreground">{t.settings.theme}</h2>
           <div className="flex gap-2">
             <button
               onClick={() => updateTheme('light')}
               className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                 settings.theme === 'light'
                   ? "bg-[#EB0000] text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
+                  : "bg-card text-card-foreground hover:bg-secondary"
               }`}
             >
               {t.settings.themeLight}
@@ -151,7 +151,7 @@ export default function Settings() {
               className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                 settings.theme === 'dark'
                   ? "bg-[#EB0000] text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-200"
+                  : "bg-card text-card-foreground hover:bg-secondary"
               }`}
             >
               {t.settings.themeDark}
@@ -160,8 +160,8 @@ export default function Settings() {
         </section>
 
         {/* Display Mode Section */}
-        <section className="mb-4 bg-white p-4 shadow-sm">
-          <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.displayMode}</h2>
+        <section className="mb-4 bg-card p-4 shadow-sm">
+          <h2 className="text-lg font-bold mb-3 text-foreground">{t.settings.displayMode}</h2>
           <div className="flex gap-2">
             {displayModes.map((mode) => (
               <button
@@ -170,7 +170,7 @@ export default function Settings() {
                 className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                   settings.displayMode === mode
                     ? "bg-[#EB0000] text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-200"
+                    : "bg-card text-card-foreground hover:bg-secondary"
                 }`}
               >
                 {getDisplayModeLabel(mode)}
@@ -180,11 +180,11 @@ export default function Settings() {
         </section>
 
         {/* Guangyun Display Section */}
-        <section className="mb-4 bg-white p-4 shadow-sm">
+        <section className="mb-4 bg-card p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h2 className="text-lg font-bold text-gray-800">{t.settings.guangyunDisplay}</h2>
-              <p className="text-sm text-gray-600 mt-1">{t.settings.guangyunDisplayDesc}</p>
+              <h2 className="text-lg font-bold text-foreground">{t.settings.guangyunDisplay}</h2>
+              <p className="text-sm text-muted-foreground mt-1">{t.settings.guangyunDisplayDesc}</p>
             </div>
             <div className="flex gap-2">
               <button
@@ -207,7 +207,7 @@ export default function Settings() {
                     }
                   });
                 }}
-                className="px-4 py-1.5 text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors rounded-full"
+                className="px-4 py-1.5 text-sm font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors rounded-full"
               >
                 {t.settings.deselectAll}
               </button>
@@ -220,15 +220,15 @@ export default function Settings() {
               {廣韻字段列表.map((field) => (
                 <label
                   key={field}
-                  className="flex items-start gap-1 p-1 hover:bg-gray-50 cursor-pointer border-r border-b border-gray-100 text-xs leading-tight"
+                  className="flex items-start gap-1 p-1 hover:bg-secondary cursor-pointer border-r border-b border text-xs leading-tight"
                 >
                   <input
                     type="checkbox"
                     checked={settings.廣韻字段.has(field)}
                     onChange={() => toggle廣韻字段(field)}
-                    className="w-3 h-3 mt-0.5 flex-shrink-0 accent-gray-600"
+                    className="w-3 h-3 mt-0.5 flex-shrink-0 accent-primary"
                   />
-                  <span className="min-w-0 break-words text-gray-800">
+                  <span className="min-w-0 break-words text-foreground">
                     {field}
                   </span>
                 </label>
@@ -252,7 +252,7 @@ export default function Settings() {
               </button>
               <button
                 onClick={deselectAllLanguages}
-                className="px-4 py-1.5 text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors rounded-full"
+                className="px-4 py-1.5 text-sm font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors rounded-full"
               >
                 {t.settings.deselectAll}
               </button>
@@ -266,7 +266,7 @@ export default function Settings() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="搜索语言..."
-              className="w-full border-2 border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20 rounded-full"
+              className="w-full border-2 border-border px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-full bg-background text-foreground"
             />
           </div>
 
@@ -287,15 +287,15 @@ export default function Settings() {
                   {languages.map((lang) => (
                     <label
                       key={lang.id}
-                      className="flex items-start gap-1 p-1 hover:bg-gray-50 cursor-pointer border-r border-b border-gray-100 text-xs leading-tight"
+                      className="flex items-start gap-1 p-1 hover:bg-secondary cursor-pointer border-r border-b border text-xs leading-tight"
                     >
                       <input
                         type="checkbox"
                         checked={settings.selectedLanguages.has(lang.id)}
                         onChange={() => toggleLanguage(lang.id)}
-                        className="w-3 h-3 mt-0.5 flex-shrink-0 accent-gray-600"
+                        className="w-3 h-3 mt-0.5 flex-shrink-0 accent-primary"
                       />
-                      <span className="min-w-0 break-words text-gray-800">
+                      <span className="min-w-0 break-words text-foreground">
                         {lang.name}
                       </span>
                     </label>

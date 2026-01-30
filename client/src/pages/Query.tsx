@@ -82,9 +82,9 @@ export default function Query() {
   const characters = queryResults.map(([char]) => char);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Query Input Section */}
-      <div className="bg-white p-3 shadow-sm">
+      <div className="bg-card p-3 shadow-sm">
         <div className="max-w-7xl mx-auto">
           <div className="flex gap-2">
             <input
@@ -93,7 +93,7 @@ export default function Query() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyPress}
               placeholder={t.query.placeholder}
-              className="flex-1 border-2 border-gray-300 px-3 py-2 text-base focus:outline-none focus:border-[#EB0000] focus:ring-2 focus:ring-[#EB0000]/20"
+              className="flex-1 border-2 border-border px-3 py-2 text-base focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 bg-background text-foreground"
             />
             <button
               onClick={handleQuery}
@@ -114,10 +114,10 @@ export default function Query() {
         <div className="p-4">
           <div className="max-w-full mx-auto">
             <div className="overflow-x-auto shadow-sm">
-              <table className="border-collapse border border-gray-300 bg-white">
+              <table className="border-collapse border border-border bg-card">
                 <thead>
                   <tr className="bg-[#EB0000] text-white">
-                    <th className="border border-gray-300 px-2 py-2 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+                    <th className="border border-border px-2 py-2 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                       {t.query.tableLanguage}
                     </th>
                     {characters.map((char, idx) => (
@@ -140,9 +140,9 @@ export default function Query() {
                     return (
                     <tr
                       key={row.languageId}
-                      className="hover:bg-gray-50 transition-colors"
+                      className="hover:bg-secondary transition-colors"
                     >
-                      <td className="border border-gray-300 px-2 py-2 bg-white sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+                      <td className="border border-border px-2 py-2 bg-card sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                         <span
                           className="inline-block px-2 py-1 text-sm font-bold cursor-pointer hover:opacity-80 transition-opacity"
                           style={{ 
@@ -170,7 +170,7 @@ export default function Query() {
                         return (
                         <td
                           key={`char-${charIdx}`}
-                          className="border border-gray-300 px-2 py-2 text-sm bg-white font-mono break-words overflow-hidden"
+                          className="border border-border px-2 py-2 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
                           style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                         >
                           {pronunciation}
@@ -183,7 +183,7 @@ export default function Query() {
                 </tbody>
               </table>
             </div>
-            <div className="mt-2 text-sm text-gray-600 font-medium">
+            <div className="mt-2 text-sm text-muted-foreground font-medium">
               共 {tableRows.length} 种语言
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function Query() {
             <h2 className="text-4xl font-bold text-[#EB0000] mb-3 tracking-tight">
               {t.query.title}
             </h2>
-            <p className="text-lg text-gray-600">{t.query.subtitle}</p>
+            <p className="text-lg text-muted-foreground">{t.query.subtitle}</p>
           </div>
         </div>
       )}

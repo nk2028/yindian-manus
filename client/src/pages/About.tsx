@@ -6,14 +6,14 @@ export default function About() {
   const t = getTranslation(language);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-4 text-[#EB0000] pb-3 border-b-2 border-[#EB0000]">
           {t.about.title}
         </h1>
 
-        <div className="bg-white p-6 shadow-sm">
-          <div className="space-y-4 text-base leading-relaxed text-gray-700">
+        <div className="bg-card p-6 shadow-sm">
+          <div className="space-y-4 text-base leading-relaxed text-foreground">
             <p>
               {t.about.intro}
             </p>
@@ -23,7 +23,7 @@ export default function About() {
             </p>
 
             <div>
-              <h3 className="font-bold text-lg mb-2 text-gray-800">{t.about.features}</h3>
+              <h3 className="font-bold text-lg mb-2 text-foreground">{t.about.features}</h3>
               <ul className="list-disc list-inside space-y-1.5 ml-4">
                 <li>{t.about.feature1}</li>
                 <li>{t.about.feature2}</li>

@@ -1,21 +1,24 @@
-# 音典网页版 - 已完成任务
+# 音典网页版 - 新任务列表
 
-## 任务1: 删除 LanguageSelector.tsx 并修改所有描述文案
-- [x] 删除 client/src/components/LanguageSelector.tsx
-- [x] 修改 README.md 中的"漢語方言"为"漢字讀音"
-- [x] 修改 index.html description 中的"漢語方言"为"漢字讀音"
-- [x] 修改 i18n.ts 中所有"漢語方言"/"汉语方言"为"漢字讀音"/"汉字读音"
+## 任务1: 修复 dark theme 背景色问题
+- [x] Settings.tsx: 移除 `bg-gray-50` 硬编码,改为 `bg-background`
+- [x] Query.tsx: 检查并移除硬编码背景色
+- [x] About.tsx: 检查并移除硬编码背景色
+- [x] 测试 dark theme 切换功能
 
-## 任务2: 实现 dark theme
-- [x] 在 index.css 中配置 dark theme 的 CSS 变量(已存在)
-- [x] 在 App.tsx 中根据 theme 设置添加 dark 类名到 html 元素
-- [x] 删除不必要的 @custom-variant 语法
+## 任务2: 重构 pronunciation 为字音
+- [ ] types/index.ts: 重命名 Pronunciation 相关类型
+- [ ] dataProcessor.ts: 重构所有 pronunciation 变量名
+- [ ] Query.tsx: 重构所有 pronunciation 变量名
+- [ ] 其他文件: 搜索并替换所有 pronunciation
 
-## 任务3: 优化 404 处理
-- [x] 修改 App.tsx 路由配置,404 直接跳转回首页
-- [x] 删除 NotFound.tsx 文件
-- [x] 使用 window.location.href 支持非根路径部署
+## 任务3: 实现广韵字段类型标记和格式化显示
+- [ ] types/index.ts: 添加广韵字段类型定义
+- [ ] 添加广韵字段类型映射 'lllliiiiiiiiiiiuntiiih#hhhh'
+- [ ] dataProcessor.ts: 实现 wrapIPA 和 wrapRomanization 函数
+- [ ] Query.tsx: 应用格式化函数到广韵数据显示
 
 ## 任务4: 测试并发布
-- [x] 测试所有功能
-- [x] 创建最终检查点
+- [ ] 测试 dark theme 切换
+- [ ] 测试广韵字段格式化显示
+- [ ] 创建最终检查点
