@@ -156,22 +156,59 @@ export default function Settings() {
 
         {/* Guangyun Display Section */}
         <section className="mb-4 bg-white p-4 shadow-sm">
-          <h2 className="text-lg font-bold mb-2 text-gray-800">{t.settings.guangyunDisplay}</h2>
-          <p className="text-sm text-gray-600 mb-3">{t.settings.guangyunDisplayDesc}</p>
-          <div className="flex flex-wrap gap-1">
-            {廣韻字段列表.map((field) => (
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h2 className="text-lg font-bold text-gray-800">{t.settings.guangyunDisplay}</h2>
+              <p className="text-sm text-gray-600 mt-1">{t.settings.guangyunDisplayDesc}</p>
+            </div>
+            <div className="flex gap-2">
               <button
-                key={field}
-                onClick={() => toggle廣韻字段(field)}
-                className={`px-2 py-1 text-xs font-medium transition-colors ${
-                  settings.廣韻字段.has(field)
-                    ? "bg-[#EB0000] text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-200 border border-gray-300"
-                }`}
+                onClick={() => {
+                  廣韻字段列表.forEach(field => {
+                    if (!settings.廣韻字段.has(field)) {
+                      toggle廣韻字段(field);
+                    }
+                  });
+                }}
+                className="px-4 py-1.5 text-sm font-medium bg-[#EB0000] text-white hover:bg-[#C50000] transition-colors rounded-full"
               >
-                {field}
+                {t.settings.selectAll}
               </button>
-            ))}
+              <button
+                onClick={() => {
+                  廣韻字段列表.forEach(field => {
+                    if (settings.廣韻字段.has(field)) {
+                      toggle廣韻字段(field);
+                    }
+                  });
+                }}
+                className="px-4 py-1.5 text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors rounded-full"
+              >
+                {t.settings.deselectAll}
+              </button>
+            </div>
+          </div>
+
+          {/* Guangyun Fields Grid */}
+          <div className="border border-gray-300">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              {廣韻字段列表.map((field) => (
+                <label
+                  key={field}
+                  className="flex items-start gap-1 p-2 hover:bg-gray-50 cursor-pointer border-r border-b border-gray-100 text-xs leading-tight"
+                >
+                  <input
+                    type="checkbox"
+                    checked={settings.廣韻字段.has(field)}
+                    onChange={() => toggle廣韻字段(field)}
+                    className="w-3 h-3 mt-0.5 flex-shrink-0 accent-gray-600"
+                  />
+                  <span className="min-w-0 break-words text-gray-800">
+                    {field}
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
         </section>
 

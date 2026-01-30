@@ -11,6 +11,9 @@ export const LANGUAGE_DISPLAY_NAMES: Record<Language, string> = {
 };
 
 export interface Translations {
+  // Page title
+  pageTitle: string;
+  
   // Navigation
   nav: {
     title: string;
@@ -49,7 +52,8 @@ export interface Translations {
   // About page
   about: {
     title: string;
-    description: string;
+    intro: string;
+    history: string;
     features: string;
     feature1: string;
     feature2: string;
@@ -60,6 +64,7 @@ export interface Translations {
 
 export const translations: Record<Language, Translations> = {
   'zh_HK': {
+    pageTitle: '音典網頁版 - 漢字語音查詢工具',
     nav: {
       title: '音典',
       query: '查字',
@@ -91,20 +96,22 @@ export const translations: Record<Language, Translations> = {
     },
     about: {
       title: '關於音典',
-      description: '音典網頁版是一個漢字語音查詢工具，支援約 2400 種語言變體的讀音對比查詢。',
+      intro: '漢字音典（Yindian）是全面收集各種漢語方言中漢字讀音的資料庫。它源自 Maigo 製作的 MCPDict，是最早的漢語方言讀音查詢工具之一。',
+      history: '此後，由眾多專家聯手，不斷收集整理大量漢語方言讀音資料，製作了漢字音典 APP。nk2028 基於漢字音典 APP 發佈了音典網頁版，讓更多使用者能夠方便地查詢漢字在不同時代、不同地區的讀音。目前音典網頁版收錄了約 2400 種語言變體，涵蓋上古音、中古音、近代音及現代各地方言。',
       features: '主要功能',
-      feature1: '多字同時查詢並以表格橫向對比',
-      feature2: '支援三種顯示方式（地圖集二/音典/陳邡）切換',
-      feature3: '靈活的語言篩選系統配合顏色標籤',
-      feature4: '採用瑞士 SBB 設計風格，高信息密度的緊湊排版',
+      feature1: '支援多字同時查詢，以表格形式橫向對比不同語言變體的讀音',
+      feature2: '提供三種顯示模式（地圖集二/音典/陳邡），滿足不同用戶的查詢習慣',
+      feature3: '靈活的語言篩選系統，配合顏色標籤和分類結構，方便快速定位所需語言',
+      feature4: '對廣韻等歷史音韻資料提供詳細的字段選擇，支援多種擬音系統對比',
     },
   },
   
   'zh_CN': {
+    pageTitle: '音典网页版 - 汉字语音查询工具',
     nav: {
       title: '音典',
       query: '查字',
-      settings: '设置',
+      settings: '设定',
       about: '关于',
     },
     query: {
@@ -132,16 +139,18 @@ export const translations: Record<Language, Translations> = {
     },
     about: {
       title: '关于音典',
-      description: '音典网页版是一个汉字语音查询工具,支持约 2400 种语言变体的读音对比查询。',
+      intro: '汉字音典（Yindian）是全面收集各种汉语方言中汉字读音的资料库。它源自 Maigo 制作的 MCPDict，是最早的汉语方言读音查询工具之一。',
+      history: '此后，由众多专家联手，不断收集整理大量汉语方言读音资料，制作了汉字音典 APP。nk2028 基于汉字音典 APP 发布了音典网页版，让更多使用者能够方便地查询汉字在不同时代、不同地区的读音。目前音典网页版收录了约 2400 种语言变体，涵盖上古音、中古音、近代音及现代各地方言。',
       features: '主要功能',
-      feature1: '多字同时查询并以表格横向对比',
-      feature2: '支持三种显示方式（地图集二/音典/陈邡）切换',
-      feature3: '灵活的语言筛选系统配合颜色标签',
-      feature4: '采用瑞士 SBB 设计风格,高信息密度的紧凑排版',
+      feature1: '支持多字同时查询，以表格形式横向对比不同语言变体的读音',
+      feature2: '提供三种显示模式（地图集二/音典/陈邡），满足不同用户的查询习惯',
+      feature3: '灵活的语言筛选系统，配合颜色标签和分类结构，方便快速定位所需语言',
+      feature4: '对广韵等历史音韵资料提供详细的字段选择，支持多种拟音系统对比',
     },
   },
   
   'en_GB': {
+    pageTitle: 'Yindian Web - Chinese Character Pronunciation Query Tool',
     nav: {
       title: 'Yindian',
       query: 'Query',
@@ -173,21 +182,23 @@ export const translations: Record<Language, Translations> = {
     },
     about: {
       title: 'About Yindian',
-      description: 'Yindian Web is a Chinese character pronunciation query tool that supports comparison of approximately 2,400 language variants.',
+      intro: 'Yindian (Chinese Character Phonetic Dictionary) is a comprehensive database collecting Chinese character pronunciations across various Chinese dialects. It originated from MCPDict created by Maigo, one of the earliest Chinese dialect pronunciation query tools.',
+      history: 'Subsequently, numerous experts collaborated to continuously collect and organize extensive Chinese dialect pronunciation data, creating the Yindian mobile app. nk2028 released the Yindian web version based on the Yindian app, enabling more users to conveniently query Chinese character pronunciations across different historical periods and regions. Currently, the Yindian web version includes approximately 2,400 language variants, covering Old Chinese, Middle Chinese, Early Mandarin, and modern regional dialects.',
       features: 'Key Features',
-      feature1: 'Query multiple characters with horizontal table comparison',
-      feature2: 'Support three display modes (Atlas II / Yindian / Chen Fang)',
-      feature3: 'Flexible language filtering system with color tags',
-      feature4: 'Swiss SBB design style with high information density',
+      feature1: 'Support querying multiple characters simultaneously, comparing pronunciations across different language variants in table format',
+      feature2: 'Provide three display modes (Atlas II/Yindian/Chenfang) to accommodate different user query preferences',
+      feature3: 'Flexible language filtering system with color tags and hierarchical structure for quick language location',
+      feature4: 'Detailed field selection for historical phonological data such as Guangyun, supporting comparison across multiple reconstruction systems',
     },
   },
   
   'ja': {
+    pageTitle: '音典ウェブ版 - 漢字音声検索ツール',
     nav: {
-      title: '音典',
-      query: '検索',
-      settings: '設定',
-      about: '概要',
+      title: 'Yindian',
+      query: 'Query',
+      settings: 'Settings',
+      about: 'About',
     },
     query: {
       title: '音典ウェブ版',
@@ -214,12 +225,13 @@ export const translations: Record<Language, Translations> = {
     },
     about: {
       title: '音典について',
-      description: '音典ウェブ版は、約2400種類の言語変種の発音を比較検索できる漢字音声検索ツールです。',
+      intro: '漢字音典（Yindian）は、様々な中国語方言における漢字の読みを包括的に収集したデータベースです。Maigoが制作したMCPDictを起源とし、最も早い中国語方言発音検索ツールの一つです。',
+      history: 'その後、多くの専門家が協力し、大量の中国語方言発音データを継続的に収集・整理し、漢字音典アプリを制作しました。nk2028は漢字音典アプリを基に音典ウェブ版を公開し、より多くのユーザーが異なる時代や地域の漢字発音を便利に検索できるようにしました。現在、音典ウェブ版は約2400種類の言語変種を収録し、上古音、中古音、近代音、現代の各地方言をカバーしています。',
       features: '主な機能',
-      feature1: '複数文字を同時に検索し、表形式で横方向に比較',
-      feature2: '3つの表示方式（地図集二/音典/陳邡）の切り替えに対応',
-      feature3: 'カラータグ付きの柔軟な言語フィルタリングシステム',
-      feature4: 'スイスSBBデザインスタイル、高密度レイアウト',
+      feature1: '複数文字の同時検索に対応し、表形式で異なる言語変種の発音を横方向に比較',
+      feature2: '三つの表示モード（地図集二/音典/陳邡）を提供し、異なるユーザーの検索習慣に対応',
+      feature3: '柔軟な言語フィルタリングシステム、カラータグと階層構造で必要な言語を素早く特定',
+      feature4: '廣韻などの歴史音韻データに詳細なフィールド選択を提供し、複数の擬音システムの比較に対応',
     },
   },
 };

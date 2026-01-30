@@ -17,8 +17,12 @@ export default function About() {
 
         <div className="bg-white p-6 shadow-sm">
           <div className="space-y-4 text-base leading-relaxed text-gray-700">
-            <p className="text-lg">
-              {t.about.description}
+            <p>
+              {t.about.intro}
+            </p>
+            
+            <p>
+              {t.about.history}
             </p>
 
             <div>

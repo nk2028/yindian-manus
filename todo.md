@@ -1,36 +1,29 @@
-# 音典网页版 - 重构任务
+# 音典网页版 - 已完成任务
 
-## 任务1: 重构类型定义
-- [x] types/index.ts: GuangyunField → 廣韻字段
-- [x] types/index.ts: GUANGYUN_FIELDS → 廣韻字段列表
-- [x] types/index.ts: Language 类型改为标准代码
-- [x] types/index.ts: Settings.guangyunFields → Settings.廣韻字段
+## 任务1: 修改广韵字段选择UI样式
+- [x] Settings.tsx: 将广韵字段选择改为与语言列表相同的样式
+- [x] 使用复选框列表,而不是按钮样式
+- [x] 保持紧凑布局
+- [x] 添加 Select All/Deselect All 按钮
 
-## 任务2: 更新所有文件中的变量名
-- [x] dataProcessor.ts: parseGuangyunPronunciation → parse廣韻Pronunciation
-- [x] dataProcessor.ts: 导入和使用 廣韻字段 类型
-- [x] AppContext.tsx: guangyunFields → 廣韻字段
-- [x] AppContext.tsx: toggleGuangyunField → toggle廣韻字段
-- [x] AppContext.tsx: 更新 Language 相关逻辑
-- [x] Settings.tsx: 更新广韵字段选择相关变量
-- [x] Settings.tsx: 更新 Language 选择器
-- [x] Query.tsx: 更新 parseGuangyunPronunciation 调用
-- [x] Query.tsx: 移除调试代码
-- [x] i18n.ts: 更新语言代码和翻译键
+## 任务2: 重写简介内容
+- [x] About.tsx: 移除SBB相关内容
+- [x] 使用新的简介文本(基于Maigo MCPDict和nk2028)
+- [x] 扩写内容,提供更详细的介绍(分为intro和history两段)
+- [x] 更新所有语言的翻译(zh_HK, zh_CN, en_GB, ja)
+- [x] 更新功能列表,包含广韵字段选择功能
 
-## 任务3: 优化广韵设置UI
-- [x] Settings.tsx: 将广韵字段选择改为紧凑样式
-- [x] Settings.tsx: 参考语言选择的样式设计
-
-## 任务4: 修复广韵多音字显示
-- [x] 修改 parse廣韻Pronunciation 处理多个读音(用 '; ' 分隔)
-- [x] 添加递归处理逻辑
+## 任务3: 更新标题和HTML lang属性
+- [x] 添加 pageTitle 字段到翻译配置
+- [x] 标题随语言变化而变化
+- [x] 更新HTML的lang属性随语言变化
+- [x] 在 App.tsx 中添加 useEffect 监听语言变化
+- [x] 确保所有语言的标题翻译正确
 
 ## 测试验证
-- [x] 测试「率」字广韵多音字显示(显示两个读音)
-- [x] 测试语言切换功能
-- [x] 测试广韵字段选择功能
-- [x] 测试设置持久化
-- [x] 测试语言代码迁移(从旧代码自动升级)
+- [x] 测试广韵字段选择新样式(复选框列表)
+- [x] 测试简介页面内容(繁体中文)
+- [x] 测试标题在不同语言下的显示(英文/繁体中文)
+- [x] 测试HTML lang属性变化
 
 ## 所有任务已完成 ✅

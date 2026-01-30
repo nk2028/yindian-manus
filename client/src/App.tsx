@@ -12,6 +12,7 @@ import Query from "./pages/Query";
 import Settings from "./pages/Settings";
 import About from "./pages/About";
 import { getTranslation, type Language } from "./lib/i18n";
+import { useEffect } from "react";
 
 
 function Navigation() {
@@ -55,6 +56,24 @@ function Navigation() {
 }
 
 function Router() {
+  const { language } = useApp();
+  const t = getTranslation(language);
+  
+  // Update document title and lang attribute when language changes
+  useEffect(() => {
+    document.title = t.pageTitle;
+    
+    // Map language codes to HTML lang attribute values
+    const langMap: Record<Language, string> = {
+      'zh_HK': 'zh-HK',
+      'zh_CN': 'zh-CN',
+      'en_GB': 'en-GB',
+      'ja': 'ja',
+    };
+    
+    document.documentElement.lang = langMap[language];
+  }, [language, t.pageTitle]);
+  
   return (
     <>
       <Navigation />
