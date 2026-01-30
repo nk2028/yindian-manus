@@ -61,8 +61,8 @@ pnpm preview
 ## 相關項目
 
 - [漢字音典 APP 版](https://github.com/osfans/MCPDict) - 原版
-- [唯二](https://github.com/vearvip)開發的[網頁版](https://mcpdict.vear.vip/)([前端](https://github.com/vearvip/mcpdict-frontend)、[后端](https://github.com/vearvip/mcpdict-backend)):提供了字音查詢、長文註音、語言地圖、設置等功能
-- [不覊](https://github.com/jengzang)開發的[方音圖鑑](https://dialects.yzup.top)([前端](https://github.com/jengzang/dialects-js-frontend)、[后端](https://github.com/jengzang/dialects-backend)):提供了查中古、查音位、查調、查字、分區繪圖、自定義繪圖等功能
+- [唯二開發的網頁版](https://mcpdict.vear.vip/)([前端](https://github.com/vearvip/mcpdict-frontend)、[后端](https://github.com/vearvip/mcpdict-backend)): 提供了字音查詢、長文註音、語言地圖、設置等功能
+- [不羁開發的方音圖鑑](https://dialects.yzup.top)([前端](https://github.com/jengzang/dialects-js-frontend)、[后端](https://github.com/jengzang/dialects-backend)): 提供了查中古、查音位、查調、查字、分區繪圖、自定義繪圖等功能
 
 ## 圖標製作
 

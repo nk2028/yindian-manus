@@ -73,7 +73,9 @@ export interface Translations {
     relatedProjects: string;
     relatedApp: string;
     relatedWeiEr: string;
+    relatedWeiErDesc: string;
     relatedBuJi: string;
+    relatedBuJiDesc: string;
     iconCredit: string;
     feedback: string;
     feedbackGithub: string;
