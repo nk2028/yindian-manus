@@ -2,7 +2,7 @@
 // Design: Bold red accents, efficient layout, clear hierarchy
 
 import { queryCharacters } from "@/lib/api";
-import { buildTableRows } from "@/lib/dataProcessor";
+import { buildTableRows, parseGuangyunPronunciation } from "@/lib/dataProcessor";
 import type { CharacterResult, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
@@ -169,15 +169,22 @@ export default function Query() {
                           {row.languageAbbr}
                         </span>
                       </td>
-                      {characters.map((char, charIdx) => (
+                      {characters.map((char, charIdx) => {
+                        let pronunciation = row.pronunciations[char] || "—";
+                        // Special handling for Guangyun (廣韻) data
+                        if (row.languageAbbr === "廣韻" && pronunciation !== "—") {
+                          pronunciation = parseGuangyunPronunciation(pronunciation, settings.guangyunFields);
+                        }
+                        return (
                         <td
                           key={`char-${charIdx}`}
                           className="border border-gray-300 px-2 py-2 text-sm bg-white font-mono break-words overflow-hidden"
                           style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                         >
-                          {row.pronunciations[char] || "—"}
+                          {pronunciation}
                         </td>
-                      ))}
+                        );
+                      })}
                     </tr>
                     );
                   })}

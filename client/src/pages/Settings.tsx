@@ -4,6 +4,7 @@
 import { useApp } from "@/contexts/AppContext";
 import { getDisplayModeLabel } from "@/lib/dataProcessor";
 import type { DisplayMode } from "@/types";
+import { GUANGYUN_FIELDS } from "@/types";
 import { useState, useMemo } from "react";
 import { getTranslation, formatString } from "@/lib/i18n";
 
@@ -37,6 +38,7 @@ export default function Settings() {
     toggleLanguage,
     selectAllLanguages,
     deselectAllLanguages,
+    toggleGuangyunField,
     language,
     updateLanguage,
   } = useApp();
@@ -148,6 +150,28 @@ export default function Settings() {
               >
                 {getDisplayModeLabel(mode)}
               </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Guangyun Display Section */}
+        <section className="mb-4 bg-white p-4 shadow-sm">
+          <h2 className="text-lg font-bold mb-2 text-gray-800">{t.settings.guangyunDisplay}</h2>
+          <p className="text-sm text-gray-600 mb-3">{t.settings.guangyunDisplayDesc}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {GUANGYUN_FIELDS.map((field) => (
+              <label
+                key={field}
+                className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded cursor-pointer hover:bg-gray-50 transition-colors"
+              >
+                <input
+                  type="checkbox"
+                  checked={settings.guangyunFields.has(field)}
+                  onChange={() => toggleGuangyunField(field)}
+                  className="w-4 h-4 text-[#EB0000] border-gray-300 rounded focus:ring-[#EB0000] focus:ring-2"
+                />
+                <span className="text-sm text-gray-700">{field}</span>
+              </label>
             ))}
           </div>
         </section>

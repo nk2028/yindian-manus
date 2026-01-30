@@ -5,10 +5,12 @@ import type {
   CharacterResult,
   DisplayMode,
   DisplayModeConfig,
+  GuangyunField,
   LanguageInfo,
   ProcessedLanguage,
   TableRow,
 } from "@/types";
+import { GUANGYUN_FIELDS } from "@/types";
 
 /**
  * Display mode configurations
@@ -114,4 +116,34 @@ export function buildTableRows(
  */
 export function getDisplayModeLabel(mode: DisplayMode): string {
   return mode;
+}
+
+/**
+ * Parse Guangyun pronunciation data and extract selected fields
+ * @param pronunciation Raw pronunciation string with fields separated by '/'
+ * @param selectedFields Set of fields to extract
+ * @returns Formatted string with selected fields
+ */
+export function parseGuangyunPronunciation(
+  pronunciation: string,
+  selectedFields: Set<GuangyunField>
+): string {
+  // Split by '/' to get all fields
+  const parts = pronunciation.split('/');
+  
+  // If not enough parts, return original
+  if (parts.length < GUANGYUN_FIELDS.length) {
+    return pronunciation;
+  }
+  
+  // Extract selected fields
+  const selectedParts: string[] = [];
+  GUANGYUN_FIELDS.forEach((field, index) => {
+    if (selectedFields.has(field) && parts[index]) {
+      selectedParts.push(parts[index]);
+    }
+  });
+  
+  // Join with ' / ' for better readability
+  return selectedParts.length > 0 ? selectedParts.join(' / ') : pronunciation;
 }

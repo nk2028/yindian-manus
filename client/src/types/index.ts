@@ -56,11 +56,71 @@ export interface DisplayModeConfig {
 }
 
 /**
+ * Guangyun (廣韻) field names
+ */
+export type GuangyunField =
+  | "切韻拼音"
+  | "白一平轉寫"
+  | "古韻羅馬字"
+  | "有女羅馬字"
+  | "髙本漢擬音"
+  | "王力(1957)擬音"
+  | "王力(1985)擬音"
+  | "李榮擬音"
+  | "邵榮芬擬音"
+  | "蒲立本擬音"
+  | "鄭張尙芳擬音"
+  | "潘悟雲(2000)擬音"
+  | "潘悟雲(2013)擬音"
+  | "潘悟雲(2023)擬音"
+  | "unt(2020)擬音"
+  | "unt(2022)擬音"
+  | "unt通俗擬音"
+  | "msoeg擬音"
+  | "切韻音系描述"
+  | "攝"
+  | "方音字彙描述"
+  | "廣韻韻目原貌"
+  | "折合平水韻目原貌"
+  | "反切";
+
+/**
+ * All Guangyun fields in order
+ */
+export const GUANGYUN_FIELDS: GuangyunField[] = [
+  "切韻拼音",
+  "白一平轉寫",
+  "古韻羅馬字",
+  "有女羅馬字",
+  "髙本漢擬音",
+  "王力(1957)擬音",
+  "王力(1985)擬音",
+  "李榮擬音",
+  "邵榮芬擬音",
+  "蒲立本擬音",
+  "鄭張尙芳擬音",
+  "潘悟雲(2000)擬音",
+  "潘悟雲(2013)擬音",
+  "潘悟雲(2023)擬音",
+  "unt(2020)擬音",
+  "unt(2022)擬音",
+  "unt通俗擬音",
+  "msoeg擬音",
+  "切韻音系描述",
+  "攝",
+  "方音字彙描述",
+  "廣韻韻目原貌",
+  "折合平水韻目原貌",
+  "反切",
+];
+
+/**
  * User settings
  */
 export interface UserSettings {
   displayMode: DisplayMode;
   selectedLanguages: Set<number>; // Set of language IDs
+  guangyunFields: Set<GuangyunField>; // Selected Guangyun fields to display
 }
 
 /**

@@ -38,6 +38,8 @@ export interface Translations {
     displayModeAtlas2: string;
     displayModeYindian: string;
     displayModeChenfang: string;
+    guangyunDisplay: string;
+    guangyunDisplayDesc: string;
     languageSelection: string;
     selectAll: string;
     deselectAll: string;
@@ -80,6 +82,8 @@ export const translations: Record<Language, Translations> = {
       displayModeAtlas2: '地圖集二',
       displayModeYindian: '音典',
       displayModeChenfang: '陳邡',
+      guangyunDisplay: '廣韻顯示方式',
+      guangyunDisplayDesc: '選擇廣韻數據要顯示的字段（可多選）',
       languageSelection: '語言選擇',
       selectAll: '全選',
       deselectAll: '全不選',
@@ -119,6 +123,8 @@ export const translations: Record<Language, Translations> = {
       displayModeAtlas2: '地图集二',
       displayModeYindian: '音典',
       displayModeChenfang: '陈邡',
+      guangyunDisplay: '广韵显示方式',
+      guangyunDisplayDesc: '选择广韵数据要显示的字段（可多选）',
       languageSelection: '语言选择',
       selectAll: '全选',
       deselectAll: '全不选',
@@ -158,6 +164,8 @@ export const translations: Record<Language, Translations> = {
       displayModeAtlas2: 'Atlas II',
       displayModeYindian: 'Yindian',
       displayModeChenfang: 'Chen Fang',
+      guangyunDisplay: 'Guangyun Display',
+      guangyunDisplayDesc: 'Select fields to display for Guangyun data (multiple selection)',
       languageSelection: 'Language Selection',
       selectAll: 'Select All',
       deselectAll: 'Deselect All',
@@ -197,6 +205,8 @@ export const translations: Record<Language, Translations> = {
       displayModeAtlas2: '地図集二',
       displayModeYindian: '音典',
       displayModeChenfang: '陳邡',
+      guangyunDisplay: '廣韻表示方式',
+      guangyunDisplayDesc: '廣韻データに表示するフィールドを選択（複数選択可）',
       languageSelection: '言語選択',
       selectAll: '全選択',
       deselectAll: '全解除',

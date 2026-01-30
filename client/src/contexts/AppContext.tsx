@@ -4,6 +4,7 @@
 import { processLanguages } from "@/lib/dataProcessor";
 import type {
   DisplayMode,
+  GuangyunField,
   LanguageInfo,
   ProcessedLanguage,
   UserSettings,
@@ -31,6 +32,7 @@ interface AppContextValue {
   toggleLanguage: (langId: number) => void;
   selectAllLanguages: () => void;
   deselectAllLanguages: () => void;
+  toggleGuangyunField: (field: GuangyunField) => void;
   
   // UI language
   language: Language;
@@ -49,6 +51,7 @@ const DISPLAY_MODE_MIGRATION: Record<string, DisplayMode> = {
 const DEFAULT_SETTINGS: UserSettings = {
   displayMode: "地圖集二",
   selectedLanguages: new Set<number>(),
+  guangyunFields: new Set<GuangyunField>(["切韻拼音", "切韻音系描述"]), // Default: 切韻拼音 and 切韻音系描述
 };
 
 const DEFAULT_LANGUAGE: Language = '香港';
@@ -83,6 +86,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return {
           displayMode: migrateDisplayMode(parsed.displayMode),
           selectedLanguages: new Set(parsed.selectedLanguages || []),
+          guangyunFields: new Set<GuangyunField>(parsed.guangyunFields || ["切韻拼音", "切韻音系描述"]),
         };
       }
     } catch (e) {
@@ -90,6 +94,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     return DEFAULT_SETTINGS;
   });
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('yindian-settings', JSON.stringify({
+        displayMode: settings.displayMode,
+        selectedLanguages: Array.from(settings.selectedLanguages),
+        guangyunFields: Array.from(settings.guangyunFields),
+      }));
+    } catch (e) {
+      console.error('Failed to save settings:', e);
+    }
+  }, [settings]);
 
   // Load languages on mount
   useEffect(() => {
@@ -149,6 +166,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSettings((prev) => ({ ...prev, selectedLanguages: new Set() }));
   };
 
+  const toggleGuangyunField = (field: GuangyunField) => {
+    setSettings((prev) => {
+      const newFields = new Set(prev.guangyunFields);
+      if (newFields.has(field)) {
+        newFields.delete(field);
+      } else {
+        newFields.add(field);
+      }
+      return { ...prev, guangyunFields: newFields };
+    });
+  };
+
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     try {
@@ -168,6 +197,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toggleLanguage,
     selectAllLanguages,
     deselectAllLanguages,
+    toggleGuangyunField,
     language,
     updateLanguage: setLanguage,
   };
