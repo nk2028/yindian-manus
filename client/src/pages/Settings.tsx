@@ -38,6 +38,7 @@ export default function Settings() {
     selectAllLanguages,
     deselectAllLanguages,
     language,
+    updateLanguage,
   } = useApp();
   const t = getTranslation(language);
 
@@ -64,7 +65,12 @@ export default function Settings() {
       }
       groups.get(region)!.push(lang);
     });
-    return Array.from(groups.entries()).sort(([, a], [, b]) => b.length - a.length);
+    // Sort by minimum language ID in each region
+    return Array.from(groups.entries()).sort(([, a], [, b]) => {
+      const minIdA = Math.min(...a.map(lang => lang.id));
+      const minIdB = Math.min(...b.map(lang => lang.id));
+      return minIdA - minIdB;
+    });
   }, [filteredLanguages]);
 
   const displayModes: DisplayMode[] = ["地圖集二", "音典", "陳邡"];
@@ -79,6 +85,53 @@ export default function Settings() {
           {t.settings.title}
         </h1>
 
+        {/* Interface Language Section */}
+        <section className="mb-4 bg-white p-4 shadow-sm">
+          <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.interfaceLanguage}</h2>
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => updateLanguage('香港')}
+              className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                language === '香港'
+                  ? "bg-[#EB0000] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              中文(繁體)
+            </button>
+            <button
+              onClick={() => updateLanguage('中国')}
+              className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                language === '中国'
+                  ? "bg-[#EB0000] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              中文(简体)
+            </button>
+            <button
+              onClick={() => updateLanguage('en')}
+              className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                language === 'en'
+                  ? "bg-[#EB0000] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              English
+            </button>
+            <button
+              onClick={() => updateLanguage('ja')}
+              className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                language === 'ja'
+                  ? "bg-[#EB0000] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              日本語
+            </button>
+          </div>
+        </section>
+
         {/* Display Mode Section */}
         <section className="mb-4 bg-white p-4 shadow-sm">
           <h2 className="text-lg font-bold mb-3 text-gray-800">{t.settings.displayMode}</h2>
@@ -87,7 +140,7 @@ export default function Settings() {
               <button
                 key={mode}
                 onClick={() => updateDisplayMode(mode)}
-                className={`px-6 py-2.5 font-medium transition-colors rounded-full ${
+                className={`px-6 py-1.5 text-sm font-medium transition-colors rounded-full ${
                   settings.displayMode === mode
                     ? "bg-[#EB0000] text-white"
                     : "bg-white text-gray-700 hover:bg-gray-200"

@@ -16,7 +16,7 @@ import { getTranslation, type Language } from "./lib/i18n";
 
 function Navigation() {
   const [location] = useLocation();
-  const { language, setLanguage } = useApp();
+  const { language, updateLanguage } = useApp();
   const t = getTranslation(language);
 
   const navItems = [

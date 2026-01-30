@@ -34,7 +34,7 @@ interface AppContextValue {
   
   // UI language
   language: Language;
-  setLanguage: (lang: Language) => void;
+  updateLanguage: (lang: Language) => void;
 }
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
@@ -169,7 +169,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     selectAllLanguages,
     deselectAllLanguages,
     language,
-    setLanguage,
+    updateLanguage: setLanguage,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
