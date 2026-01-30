@@ -73,10 +73,11 @@ export async function fetchLanguages(forceRefresh = false): Promise<LanguageInfo
     
     // Check if we need to update cache
     const cachedVersion = getCachedVersion();
+    const currentVersion = String(version); // Ensure version is string for comparison
     
-    if (forceRefresh || !cachedVersion || cachedVersion !== version) {
-      console.log(`Version mismatch or force refresh. Cached: ${cachedVersion}, API: ${version}`);
-      setCachedVersion(version);
+    if (forceRefresh || !cachedVersion || cachedVersion !== currentVersion) {
+      console.log(`Version mismatch or force refresh. Cached: ${cachedVersion}, API: ${currentVersion}`);
+      setCachedVersion(currentVersion);
       setCachedLanguages(data);
       return data;
     }
@@ -89,7 +90,7 @@ export async function fetchLanguages(forceRefresh = false): Promise<LanguageInfo
     }
     
     // Fallback: cache and return API data
-    setCachedVersion(version);
+    setCachedVersion(currentVersion);
     setCachedLanguages(data);
     return data;
   } catch (error) {
@@ -133,8 +134,9 @@ export async function queryCharacters(
     
     // Check version and trigger language refresh if needed
     const cachedVersion = getCachedVersion();
-    if (cachedVersion && cachedVersion !== apiResponse.version) {
-      console.log(`Version mismatch detected. Cached: ${cachedVersion}, API: ${apiResponse.version}`);
+    const currentVersion = String(apiResponse.version); // Ensure version is string for comparison
+    if (cachedVersion && cachedVersion !== currentVersion) {
+      console.log(`Version mismatch detected. Cached: ${cachedVersion}, API: ${currentVersion}`);
       // Trigger background refresh of languages
       fetchLanguages(true).catch(console.error);
     }

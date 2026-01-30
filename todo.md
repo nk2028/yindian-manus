@@ -1,6 +1,8 @@
-# 音典网页版 - 修正字体路径
+# 音典网页版 - 修复无限刷新bug
 
-## 问题: 绝对路径不适应非根路径部署
-- [x] 方案1: 将字体文件移到src/assets/fonts/,使用import导入
-- [x] 方案2: 保持在public/fonts/,在CSS中使用相对于base的路径
-- [x] 选择方案1,因为Vite会正确处理资源路径
+## 问题: 版本比较类型不匹配
+- [x] cachedVersion是string类型(从localStorage读取)
+- [x] version是string类型(API返回),但可能被解析为其他类型
+- [x] 使用String()显式转换确保类型一致
+- [x] 修复fetchLanguages和queryCharacters中的版本比较
+- [x] 避免无限刷新
