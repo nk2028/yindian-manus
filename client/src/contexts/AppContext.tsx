@@ -4,12 +4,12 @@
 import { processLanguages } from "@/lib/dataProcessor";
 import type {
   DisplayMode,
-  GuangyunField,
+  廣韻字段,
+  Language,
   LanguageInfo,
   ProcessedLanguage,
   UserSettings,
 } from "@/types";
-import type { Language } from "@/lib/i18n";
 import {
   createContext,
   useContext,
@@ -32,7 +32,7 @@ interface AppContextValue {
   toggleLanguage: (langId: number) => void;
   selectAllLanguages: () => void;
   deselectAllLanguages: () => void;
-  toggleGuangyunField: (field: GuangyunField) => void;
+  toggle廣韻字段: (field: 廣韻字段) => void;
   
   // UI language
   language: Language;
@@ -51,14 +51,26 @@ const DISPLAY_MODE_MIGRATION: Record<string, DisplayMode> = {
 const DEFAULT_SETTINGS: UserSettings = {
   displayMode: "地圖集二",
   selectedLanguages: new Set<number>(),
-  guangyunFields: new Set<GuangyunField>(["切韻拼音", "切韻音系描述"]), // Default: 切韻拼音 and 切韻音系描述
+  廣韻字段: new Set<廣韻字段>(["切韻拼音", "切韻音系描述"]), // Default: 切韻拼音 and 切韻音系描述
 };
 
-const DEFAULT_LANGUAGE: Language = '香港';
+const DEFAULT_LANGUAGE: Language = 'zh_HK';
 
 // Migrate old displayMode value if needed
 function migrateDisplayMode(mode: string): DisplayMode {
   return (DISPLAY_MODE_MIGRATION[mode] as DisplayMode) || mode as DisplayMode;
+}
+
+// Migration map for old language codes
+const LANGUAGE_MIGRATION: Record<string, Language> = {
+  '香港': 'zh_HK',
+  '中国': 'zh_CN',
+  'en': 'en_GB',
+};
+
+// Migrate old language code if needed
+function migrateLanguage(lang: string): Language {
+  return (LANGUAGE_MIGRATION[lang] as Language) || lang as Language;
 }
 
 export function AppProvider({ children }: { children: ReactNode }) {
@@ -66,11 +78,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [isLoadingLanguages, setIsLoadingLanguages] = useState(true);
   const [languagesError, setLanguagesError] = useState<Error | null>(null);
   const [language, setLanguageState] = useState<Language>(() => {
-    // Try to load language from localStorage
+    // Try to load language from localStorage with migration
     try {
       const saved = localStorage.getItem('yindian-language');
       if (saved) {
-        return saved as Language;
+        return migrateLanguage(saved);
       }
     } catch (e) {
       console.error('Failed to load language:', e);
@@ -86,7 +98,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return {
           displayMode: migrateDisplayMode(parsed.displayMode),
           selectedLanguages: new Set(parsed.selectedLanguages || []),
-          guangyunFields: new Set<GuangyunField>(parsed.guangyunFields || ["切韻拼音", "切韻音系描述"]),
+          廣韻字段: new Set<廣韻字段>(parsed.廣韻字段 || parsed.guangyunFields || ["切韻拼音", "切韻音系描述"]),
         };
       }
     } catch (e) {
@@ -101,7 +113,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('yindian-settings', JSON.stringify({
         displayMode: settings.displayMode,
         selectedLanguages: Array.from(settings.selectedLanguages),
-        guangyunFields: Array.from(settings.guangyunFields),
+        廣韻字段: Array.from(settings.廣韻字段),
       }));
     } catch (e) {
       console.error('Failed to save settings:', e);
@@ -166,15 +178,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSettings((prev) => ({ ...prev, selectedLanguages: new Set() }));
   };
 
-  const toggleGuangyunField = (field: GuangyunField) => {
+  const toggle廣韻字段 = (field: 廣韻字段) => {
     setSettings((prev) => {
-      const newFields = new Set(prev.guangyunFields);
+      const newFields = new Set(prev.廣韻字段);
       if (newFields.has(field)) {
         newFields.delete(field);
       } else {
         newFields.add(field);
       }
-      return { ...prev, guangyunFields: newFields };
+      return { ...prev, 廣韻字段: newFields };
     });
   };
 
@@ -197,7 +209,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toggleLanguage,
     selectAllLanguages,
     deselectAllLanguages,
-    toggleGuangyunField,
+    toggle廣韻字段,
     language,
     updateLanguage: setLanguage,
   };

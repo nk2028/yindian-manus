@@ -56,9 +56,14 @@ export interface DisplayModeConfig {
 }
 
 /**
- * Guangyun (廣韻) field names
+ * Language code for UI
  */
-export type GuangyunField =
+export type Language = 'zh_HK' | 'zh_CN' | 'en_GB' | 'ja';
+
+/**
+ * 廣韻字段名稱
+ */
+export type 廣韻字段 =
   | "切韻拼音"
   | "白一平轉寫"
   | "古韻羅馬字"
@@ -85,9 +90,9 @@ export type GuangyunField =
   | "反切";
 
 /**
- * All Guangyun fields in order
+ * 所有廣韻字段（按順序）
  */
-export const GUANGYUN_FIELDS: GuangyunField[] = [
+export const 廣韻字段列表: 廣韻字段[] = [
   "切韻拼音",
   "白一平轉寫",
   "古韻羅馬字",
@@ -120,7 +125,7 @@ export const GUANGYUN_FIELDS: GuangyunField[] = [
 export interface UserSettings {
   displayMode: DisplayMode;
   selectedLanguages: Set<number>; // Set of language IDs
-  guangyunFields: Set<GuangyunField>; // Selected Guangyun fields to display
+  廣韻字段: Set<廣韻字段>; // 選中要顯示的廣韻字段
 }
 
 /**

@@ -1,47 +1,36 @@
-# 音典网页版 - 广韵数据特殊处理功能
+# 音典网页版 - 重构任务
 
-## 需求描述
-- [ ] 为广韵(簡稱=廣韻)数据添加特殊处理
-- [ ] 广韵数据包含24个字段,用 `/` 分隔
-- [ ] 在设置中添加"广韵显示方式"选项,让用户多选要显示的字段
-- [ ] 默认显示:切韻拼音 和 切韻音系描述
+## 任务1: 重构类型定义
+- [x] types/index.ts: GuangyunField → 廣韻字段
+- [x] types/index.ts: GUANGYUN_FIELDS → 廣韻字段列表
+- [x] types/index.ts: Language 类型改为标准代码
+- [x] types/index.ts: Settings.guangyunFields → Settings.廣韻字段
 
-## 广韵数据字段(共24个)
-1. 切韻拼音
-2. 白一平轉寫
-3. 古韻羅馬字
-4. 有女羅馬字
-5. 髙本漢擬音
-6. 王力(1957)擬音
-7. 王力(1985)擬音
-8. 李榮擬音
-9. 邵榮芬擬音
-10. 蒲立本擬音
-11. 鄭張尙芳擬音
-12. 潘悟雲(2000)擬音
-13. 潘悟雲(2013)擬音
-14. 潘悟雲(2023)擬音
-15. unt(2020)擬音
-16. unt(2022)擬音
-17. unt通俗擬音
-18. msoeg擬音
-19. 切韻音系描述
-20. 攝
-21. 方音字彙描述
-22. 廣韻韻目原貌
-23. 折合平水韻目原貌
-24. 反切
+## 任务2: 更新所有文件中的变量名
+- [x] dataProcessor.ts: parseGuangyunPronunciation → parse廣韻Pronunciation
+- [x] dataProcessor.ts: 导入和使用 廣韻字段 类型
+- [x] AppContext.tsx: guangyunFields → 廣韻字段
+- [x] AppContext.tsx: toggleGuangyunField → toggle廣韻字段
+- [x] AppContext.tsx: 更新 Language 相关逻辑
+- [x] Settings.tsx: 更新广韵字段选择相关变量
+- [x] Settings.tsx: 更新 Language 选择器
+- [x] Query.tsx: 更新 parseGuangyunPronunciation 调用
+- [x] Query.tsx: 移除调试代码
+- [x] i18n.ts: 更新语言代码和翻译键
 
-## 实现任务
-- [x] 更新类型定义,添加广韵字段配置
-- [x] 在 SettingsContext 中添加广韵显示字段状态管理
-- [x] 实现广韵数据解析函数(按 `/` 分割并提取选中字段)
-- [x] 在设置页面添加广韵显示方式多选框
-- [x] 更新查询结果显示逻辑,对广韵数据进行特殊处理
-- [x] 添加翻译支持(中文繁体/简体/英文/日文)
+## 任务3: 优化广韵设置UI
+- [x] Settings.tsx: 将广韵字段选择改为紧凑样式
+- [x] Settings.tsx: 参考语言选择的样式设计
+
+## 任务4: 修复广韵多音字显示
+- [x] 修改 parse廣韻Pronunciation 处理多个读音(用 '; ' 分隔)
+- [x] 添加递归处理逻辑
 
 ## 测试验证
-- [x] 测试广韵数据的字段选择功能
-- [x] 测试默认显示(切韻拼音 + 切韻音系描述)
-- [x] 测试多选不同字段组合
+- [x] 测试「率」字广韵多音字显示(显示两个读音)
+- [x] 测试语言切换功能
+- [x] 测试广韵字段选择功能
 - [x] 测试设置持久化
+- [x] 测试语言代码迁移(从旧代码自动升级)
+
+## 所有任务已完成 ✅

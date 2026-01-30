@@ -13,7 +13,7 @@ export default function LanguageSelector({ value, onChange }: LanguageSelectorPr
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const languages: Language[] = ['香港', '中国', 'en', 'ja'];
+  const languages: Language[] = ['zh_HK', 'zh_CN', 'en_GB', 'ja'];
 
   // Close dropdown when clicking outside
   useEffect(() => {

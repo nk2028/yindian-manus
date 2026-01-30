@@ -1,12 +1,12 @@
 // Internationalization translations
 // 多语言翻译配置
 
-export type Language = '香港' | '中国' | 'en' | 'ja';
+export type Language = 'zh_HK' | 'zh_CN' | 'en_GB' | 'ja';
 
 export const LANGUAGE_DISPLAY_NAMES: Record<Language, string> = {
-  '香港': '中文（繁體）',
-  '中国': '中文（简体）',
-  'en': 'English',
+  'zh_HK': '中文（繁體）',
+  'zh_CN': '中文（简体）',
+  'en_GB': 'English',
   'ja': '日本語',
 };
 
@@ -59,7 +59,7 @@ export interface Translations {
 }
 
 export const translations: Record<Language, Translations> = {
-  '香港': {
+  'zh_HK': {
     nav: {
       title: '音典',
       query: '查字',
@@ -100,7 +100,7 @@ export const translations: Record<Language, Translations> = {
     },
   },
   
-  '中国': {
+  'zh_CN': {
     nav: {
       title: '音典',
       query: '查字',
@@ -141,7 +141,7 @@ export const translations: Record<Language, Translations> = {
     },
   },
   
-  'en': {
+  'en_GB': {
     nav: {
       title: 'Yindian',
       query: 'Query',
@@ -225,7 +225,7 @@ export const translations: Record<Language, Translations> = {
 };
 
 export function getTranslation(language: Language): Translations {
-  return translations[language];
+  return translations[language] || translations['zh_HK']; // Fallback to zh_HK if language not found
 }
 
 export function formatString(template: string, values: Record<string, any>): string {

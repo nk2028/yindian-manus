@@ -2,7 +2,7 @@
 // Design: Bold red accents, efficient layout, clear hierarchy
 
 import { queryCharacters } from "@/lib/api";
-import { buildTableRows, parseGuangyunPronunciation } from "@/lib/dataProcessor";
+import { buildTableRows, parse廣韻Pronunciation } from "@/lib/dataProcessor";
 import type { CharacterResult, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
@@ -55,11 +55,6 @@ export default function Query() {
       setQueryResults(results);
 
       // Build table rows
-      console.log('Building table rows...');
-      console.log('Results:', results);
-      console.log('API version:', response.version);
-      console.log('Processed languages count:', processedLanguages.length);
-      console.log('Selected languages count:', settings.selectedLanguages.size);
       const rows = buildTableRows(
         results,
         processedLanguages,
@@ -173,7 +168,7 @@ export default function Query() {
                         let pronunciation = row.pronunciations[char] || "—";
                         // Special handling for Guangyun (廣韻) data
                         if (row.languageAbbr === "廣韻" && pronunciation !== "—") {
-                          pronunciation = parseGuangyunPronunciation(pronunciation, settings.guangyunFields);
+                          pronunciation = parse廣韻Pronunciation(pronunciation, settings.廣韻字段);
                         }
                         return (
                         <td

@@ -5,12 +5,12 @@ import type {
   CharacterResult,
   DisplayMode,
   DisplayModeConfig,
-  GuangyunField,
+  廣韻字段,
   LanguageInfo,
   ProcessedLanguage,
   TableRow,
 } from "@/types";
-import { GUANGYUN_FIELDS } from "@/types";
+import { 廣韻字段列表 } from "@/types";
 
 /**
  * Display mode configurations
@@ -119,26 +119,35 @@ export function getDisplayModeLabel(mode: DisplayMode): string {
 }
 
 /**
- * Parse Guangyun pronunciation data and extract selected fields
- * @param pronunciation Raw pronunciation string with fields separated by '/'
- * @param selectedFields Set of fields to extract
- * @returns Formatted string with selected fields
+ * 解析廣韻讀音數據並提取選中字段
+ * @param pronunciation 原始讀音字串，可能包含多個讀音用 '; ' 分隔，每個讀音的字段用 '/' 分隔
+ * @param selectedFields 要提取的字段集合
+ * @returns 格式化後的字串，只包含選中字段
  */
-export function parseGuangyunPronunciation(
+export function parse廣韻Pronunciation(
   pronunciation: string,
-  selectedFields: Set<GuangyunField>
+  selectedFields: Set<廣韻字段>
 ): string {
+  // Handle multiple pronunciations separated by '; '
+  if (pronunciation.includes('; ')) {
+    const pronunciations = pronunciation.split('; ');
+    return pronunciations
+      .map(p => parse廣韻Pronunciation(p, selectedFields))
+      .join('; ');
+  }
+  
   // Split by '/' to get all fields
   const parts = pronunciation.split('/');
   
-  // If not enough parts, return original
-  if (parts.length < GUANGYUN_FIELDS.length) {
+  // Handle short format (less than 24 fields) - just return as is
+  // This happens when API returns simplified data like "rut" without full field breakdown
+  if (parts.length < 廣韻字段列表.length) {
     return pronunciation;
   }
   
-  // Extract selected fields
+  // Extract selected fields from full 24-field format
   const selectedParts: string[] = [];
-  GUANGYUN_FIELDS.forEach((field, index) => {
+  廣韻字段列表.forEach((field, index) => {
     if (selectedFields.has(field) && parts[index]) {
       selectedParts.push(parts[index]);
     }
