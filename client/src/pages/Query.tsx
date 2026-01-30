@@ -1,5 +1,5 @@
 import { queryCharacters } from "@/lib/api";
-import { buildTableRows, parse廣韻Pronunciation } from "@/lib/dataProcessor";
+import { buildTableRows, parse廣韻字音 } from "@/lib/dataProcessor";
 import type { CharacterResult, TableRow } from "@/types";
 import { useState } from "react";
 import { useApp } from "@/contexts/AppContext";
@@ -162,19 +162,34 @@ export default function Query() {
                         </span>
                       </td>
                       {characters.map((char, charIdx) => {
-                        let pronunciation = row.pronunciations[char] || "—";
+                        let 字音 = row.字音列表[char] || "—";
+                        let isHTML = false;
                         // Special handling for Guangyun (廣韻) data
-                        if (row.languageAbbr === "廣韻" && pronunciation !== "—") {
-                          pronunciation = parse廣韻Pronunciation(pronunciation, settings.廣韻字段);
+                        if (row.languageAbbr === "廣韻" && 字音 !== "—") {
+                          字音 = parse廣韻字音(字音, settings.廣韻字段);
+                          isHTML = true; // Guangyun data contains HTML tags
                         }
+                        
+                        // Render with HTML or plain text
+                        if (isHTML) {
+                          return (
+                            <td
+                              key={`char-${charIdx}`}
+                              className="border border-border px-2 py-2 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
+                              style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
+                              dangerouslySetInnerHTML={{ __html: 字音 }}
+                            />
+                          );
+                        }
+                        
                         return (
-                        <td
-                          key={`char-${charIdx}`}
-                          className="border border-border px-2 py-2 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
-                          style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
-                        >
-                          {pronunciation}
-                        </td>
+                          <td
+                            key={`char-${charIdx}`}
+                            className="border border-border px-2 py-2 text-sm bg-card font-mono break-words overflow-hidden text-foreground"
+                            style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
+                          >
+                            {字音}
+                          </td>
                         );
                       })}
                     </tr>

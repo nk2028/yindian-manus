@@ -29,18 +29,18 @@ export type LanguageInfo = [
 
 /**
  * Character pronunciation data
- * Format: [langId, pronunciation, note?]
+ * Format: [langId, 字音, note?]
  * - langId: Language ID
- * - pronunciation: Pronunciation string
+ * - 字音: Pronunciation string
  * - note: Optional note/comment (註釋), useful for distinguishing multiple pronunciations
  */
-export type Pronunciation = [number, string, string?];
+export type 字音數據 = [number, string, string?];
 
 /**
  * Character query result
- * Format: [character, [[langId, pronunciation, note?], ...]]
+ * Format: [character, [[langId, 字音, note?], ...]]
  */
-export type CharacterResult = [string, Pronunciation[]];
+export type CharacterResult = [string, 字音數據[]];
 
 /**
  * Display mode for sorting and coloring
@@ -158,5 +158,5 @@ export interface TableRow {
   color: string;
   region: string;
   sortOrder: number;
-  pronunciations: { [char: string]: string }; // char -> pronunciation
+  字音列表: { [char: string]: string }; // char -> 字音
 }

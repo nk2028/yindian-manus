@@ -65,32 +65,32 @@ export function buildTableRows(
     langMap.set(lang.id, lang);
   });
 
-  // Create a map of language ID to pronunciations for each character
-  const langToPronunciations = new Map<number, { [char: string]: string }>();
+  // Create a map of language ID to 字音 for each character
+  const lang字音映射 = new Map<number, { [char: string]: string }>();
 
-  // Collect all pronunciations
-  queryResults.forEach(([char, pronunciations]) => {
-    pronunciations.forEach(([langId, pronunciation, note]) => {
-      if (!langToPronunciations.has(langId)) {
-        langToPronunciations.set(langId, {});
+  // Collect all 字音
+  queryResults.forEach(([char, 字音數據列表]) => {
+    字音數據列表.forEach(([langId, 字音, note]) => {
+      if (!lang字音映射.has(langId)) {
+        lang字音映射.set(langId, {});
       }
-      const langPronuns = langToPronunciations.get(langId)!;
+      const lang字音 = lang字音映射.get(langId)!;
       
-      // Format: pronunciation (note) if note exists, otherwise just pronunciation
-      const displayText = note ? `${pronunciation} (${note})` : pronunciation;
+      // Format: 字音 (note) if note exists, otherwise just 字音
+      const displayText = note ? `${字音} (${note})` : 字音;
       
-      // If this language already has a pronunciation for this character, append with separator
-      if (langPronuns[char]) {
-        langPronuns[char] += '; ' + displayText;
+      // If this language already has a 字音 for this character, append with separator
+      if (lang字音[char]) {
+        lang字音[char] += '; ' + displayText;
       } else {
-        langPronuns[char] = displayText;
+        lang字音[char] = displayText;
       }
     });
   });
 
   // Build rows only for languages that have data and are selected
   const rows: TableRow[] = [];
-  langToPronunciations.forEach((pronunciations, langId) => {
+  lang字音映射.forEach((字音列表, langId) => {
     if (!selectedLanguageIds.has(langId)) return;
 
     const lang = langMap.get(langId);
@@ -103,7 +103,7 @@ export function buildTableRows(
       color: lang.color,
       region: lang.region,
       sortOrder: lang.sortOrder,
-      pronunciations,
+      字音列表,
     });
   });
 
@@ -121,40 +121,81 @@ export function getDisplayModeLabel(mode: DisplayMode): string {
 }
 
 /**
- * 解析廣韻讀音數據並提取選中字段
- * @param pronunciation 原始讀音字串，可能包含多個讀音用 '; ' 分隔，每個讀音的字段用 '/' 分隔
+ * 廣韻字段類型標記（24個字段）
+ * l: Romanization (羅馬化)
+ * i: IPA (國際音標)
+ * c: Cyrillic Romanization (西里爾羅馬化)
+ * h: 漢字/文本
+ * #: 其他
+ */
+const 廣韻字段類型 = 'lllliiiiiiiiiiiiiih#hhhh';
+
+/**
+ * 包裝 IPA 音標
+ */
+function wrapIPA(字音: string): string {
+  return `<span lang="zh-Latn-fonipa">${字音}</span>`;
+}
+
+/**
+ * 包裝羅馬化
+ */
+function wrapRomanization(字音: string, script: string = 'Latn'): string {
+  return `<span lang="zh-${script}">${字音}</span>`;
+}
+
+/**
+ * 解析廣韻字音數據並提取選中字段
+ * @param 字音 原始字音字串，可能包含多個字音用 '; ' 分隔，每個字音的字段用 '/' 分隔
  * @param selectedFields 要提取的字段集合
  * @returns 格式化後的字串，只包含選中字段
  */
-export function parse廣韻Pronunciation(
-  pronunciation: string,
+export function parse廣韻字音(
+  字音: string,
   selectedFields: Set<廣韻字段>
 ): string {
-  // Handle multiple pronunciations separated by '; '
-  if (pronunciation.includes('; ')) {
-    const pronunciations = pronunciation.split('; ');
-    return pronunciations
-      .map(p => parse廣韻Pronunciation(p, selectedFields))
+  // Handle multiple 字音 separated by '; '
+  if (字音.includes('; ')) {
+    const 字音列表 = 字音.split('; ');
+    return 字音列表
+      .map(p => parse廣韻字音(p, selectedFields))
       .join('; ');
   }
   
   // Split by '/' to get all fields
-  const parts = pronunciation.split('/');
+  const parts = 字音.split('/');
   
   // Handle short format (less than 24 fields) - just return as is
   // This happens when API returns simplified data like "rut" without full field breakdown
   if (parts.length < 廣韻字段列表.length) {
-    return pronunciation;
+    return 字音;
   }
   
-  // Extract selected fields from full 24-field format
+  // Extract selected fields from full 24-field format with type wrapping
   const selectedParts: string[] = [];
   廣韻字段列表.forEach((field, index) => {
     if (selectedFields.has(field) && parts[index]) {
-      selectedParts.push(parts[index]);
+      let fieldValue = parts[index];
+      const fieldType = 廣韻字段類型[index];
+      
+      // Apply formatting based on field type
+      switch (fieldType) {
+        case 'i':
+          fieldValue = wrapIPA(fieldValue);
+          break;
+        case 'l':
+          fieldValue = wrapRomanization(fieldValue);
+          break;
+        case 'c':
+          fieldValue = wrapRomanization(fieldValue, 'Cyrl');
+          break;
+        // 'h' and '#' types don't need special wrapping
+      }
+      
+      selectedParts.push(fieldValue);
     }
   });
   
   // Join with ' / ' for better readability
-  return selectedParts.length > 0 ? selectedParts.join(' / ') : pronunciation;
+  return selectedParts.length > 0 ? selectedParts.join(' / ') : 字音;
 }
