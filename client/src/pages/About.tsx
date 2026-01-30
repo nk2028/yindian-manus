@@ -53,6 +53,10 @@ export default function About() {
               {t.about.iconCredit} <a href="https://github.com/ayaka14732" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/ayaka14732</a>
             </p>
 
+            <p>
+              {t.about.manusCredit} <a href="https://manus.im" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://manus.im</a>
+            </p>
+
             <div>
               <h3 className="font-bold text-lg mb-2 text-foreground">{t.about.feedback}</h3>
               <ul className="list-disc list-inside space-y-1.5 ml-4">

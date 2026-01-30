@@ -77,6 +77,7 @@ export interface Translations {
     relatedBuJi: string;
     relatedBuJiDesc: string;
     iconCredit: string;
+    manusCredit: string;
     feedback: string;
     feedbackGithub: string;
     feedbackTelegram: string;

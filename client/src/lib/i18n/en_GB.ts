@@ -53,6 +53,7 @@ export const en_GB: Translations = {
     relatedBuJi: 'Dialect Atlas by BuJi',
     relatedBuJiDesc: 'Provides Middle Chinese query, phoneme query, tone query, character query, regional mapping, custom mapping, and more',
     iconCredit: 'Yindian web icon created by Ayaka',
+    manusCredit: 'Built with Manus AI',
     feedback: 'Feedback',
     feedbackGithub: 'GitHub Issues',
     feedbackTelegram: 'Telegram Group',

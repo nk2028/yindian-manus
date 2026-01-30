@@ -68,6 +68,10 @@ pnpm preview
 
 音典網頁版圖標由[綾香](https://github.com/ayaka14732)製作。
 
+## 製作工具
+
+使用 [Manus AI](https://manus.im) 製作。
+
 ## 反饋問題
 
 - 在 https://github.com/nk2028/yindian/issues 開 issue

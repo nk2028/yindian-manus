@@ -53,6 +53,7 @@ export const zh_HK: Translations = {
     relatedBuJi: '不羁開發的方音圖鑑',
     relatedBuJiDesc: '提供了查中古、查音位、查調、查字、分區繪圖、自定義繪圖等功能',
     iconCredit: '音典網頁版圖標由綾香製作',
+    manusCredit: '使用 Manus AI 製作',
     feedback: '反饋問題',
     feedbackGithub: 'GitHub Issues',
     feedbackTelegram: 'Telegram 羣組',
