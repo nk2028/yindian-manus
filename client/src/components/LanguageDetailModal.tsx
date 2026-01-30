@@ -50,16 +50,16 @@ export default function LanguageDetailModal({ language, onClose }: LanguageDetai
           {/* Language Info */}
           <div className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <span className="font-bold text-foreground min-w-[80px]">分區:</span>
+              <span className="font-bold text-foreground min-w-[80px]">分區：</span>
               <span className="text-foreground">{language.region || '—'}</span>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="font-bold text-foreground min-w-[80px]">地點:</span>
+              <span className="font-bold text-foreground min-w-[80px]">地點：</span>
               <span className="text-foreground">{language.location || '—'}</span>
             </div>
             {language.coordinates && (
               <div className="flex items-baseline gap-2">
-                <span className="font-bold text-foreground min-w-[80px]">經緯度:</span>
+                <span className="font-bold text-foreground min-w-[80px]">經緯度：</span>
                 <span className="text-foreground">{language.coordinates}</span>
               </div>
             )}

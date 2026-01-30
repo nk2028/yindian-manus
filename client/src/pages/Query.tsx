@@ -161,11 +161,11 @@ export default function Query() {
       {/* Results Table Section */}
       {tableRows.length > 0 && (
         <div className="p-4 flex justify-center">
-          <div className="overflow-auto shadow-sm max-h-[calc(100vh-200px)]">
+          <div className="overflow-x-auto shadow-sm">
             <table className="border-collapse border border-border bg-card">
-              <thead className="sticky top-0 z-20">
+              <thead>
                 <tr className="bg-[#EB0000] text-white">
-                  <th className="border border-border px-2 py-1 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-30" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
+                  <th className="border border-border px-2 py-1 text-left text-sm font-bold bg-[#EB0000]" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
                     </th>
                   {characters.map((char: string, idx: number) => (
                     <th
