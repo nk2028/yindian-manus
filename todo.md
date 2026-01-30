@@ -1,19 +1,17 @@
 # 音典网页版 - 所有任务已完成
 
-## 任务1: 实现 /list-langs/ 本地缓存和版本检查
-- [x] api.ts 已实现完整的本地存储缓存逻辑
-- [x] 已实现版本检查机制(version mismatch 时自动刷新)
-- [x] 测试缓存功能正常工作
+## 任务1: 修复字体路径和删除调试代码
+- [x] index.css: 修改字体路径为相对路径(./fonts/)
+- [x] Query.tsx: 删除调试代码(__DEBUG_TABLE_ROWS)
 
-## 任务2: 添加 Charis SIL 字体文件和CSS样式
-- [x] 解压字体文件到 client/public/fonts/
-- [x] 在 index.css 中添加 @font-face 定义(4个字体变体)
-- [x] 添加 :lang(zh-Latn), :lang(zh-Cyrl), :lang(zh-Latn-fonipa) 样式
-- [x] 测试字体加载成功(4个字体文件已加载)
-- [x] 验证 lang 属性正确应用到广韵数据
+## 任务2: 优化设置UI样式
+- [x] Settings.tsx: 移除语言选择的滚动条限制(max-h-[600px] overflow-y-auto)
+- [x] Settings.tsx: 移除广韵显示方式表格的白边(border-gray-300 → border-border)
 
-## 任务3: 测试并发布
-- [x] 测试 /list-langs/ 缓存功能
-- [x] 测试 Charis SIL 字体显示
-- [x] 验证广韵数据的 HTML lang 属性
-- [x] 创建最终检查点
+## 任务3: 修复查询结果表格样式
+- [x] Query.tsx: 移除表格第一行第一列的"語言"文字
+- [x] Query.tsx: 修复dark mode下表格边框颜色(border-gray-300 → border-border)
+
+## 任务4: 测试并发布
+- [x] 所有修复已完成
+- [x] 准备创建最终检查点

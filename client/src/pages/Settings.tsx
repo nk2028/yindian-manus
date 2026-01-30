@@ -215,7 +215,7 @@ export default function Settings() {
           </div>
 
           {/* Guangyun Fields Grid */}
-          <div className="border border-gray-300">
+          <div className="border border-border">
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12">
               {廣韻字段列表.map((field) => (
                 <label
@@ -271,7 +271,7 @@ export default function Settings() {
           </div>
 
           {/* Ultra-dense Language Grid grouped by region */}
-          <div className="max-h-[600px] overflow-y-auto border border-gray-300">
+          <div className="border border-border">
             {languagesByRegion.map(([region, languages]) => {
               const regionColor = languages[0]?.color || '#EB0000';
               const textColor = getTextColor(regionColor);

@@ -118,12 +118,11 @@ export default function Query() {
                 <thead>
                   <tr className="bg-[#EB0000] text-white">
                     <th className="border border-border px-2 py-2 text-left text-sm font-bold bg-[#EB0000] sticky left-0 z-10" style={{ width: '128px', maxWidth: '128px', minWidth: '128px' }}>
-                      {t.query.tableLanguage}
                     </th>
                     {characters.map((char, idx) => (
                       <th
                         key={idx}
-                        className="border border-gray-300 px-2 py-2 text-center text-lg font-bold"
+                        className="border border-border px-2 py-2 text-center text-lg font-bold"
                         style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                       >
                         {char}
@@ -133,10 +132,6 @@ export default function Query() {
                 </thead>
                 <tbody>
                   {tableRows.map((row) => {
-                    // Debug: log color value
-                    if (typeof window !== 'undefined' && (window as any).__DEBUG_TABLE_ROWS) {
-                      console.log('Row:', row.languageAbbr, 'Color:', row.color);
-                    }
                     return (
                     <tr
                       key={row.languageId}
