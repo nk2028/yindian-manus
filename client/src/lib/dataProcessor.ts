@@ -74,7 +74,13 @@ export function buildTableRows(
       if (!langToPronunciations.has(langId)) {
         langToPronunciations.set(langId, {});
       }
-      langToPronunciations.get(langId)![char] = pronunciation;
+      const langPronuns = langToPronunciations.get(langId)!;
+      // If this language already has a pronunciation for this character, append with separator
+      if (langPronuns[char]) {
+        langPronuns[char] += '; ' + pronunciation;
+      } else {
+        langPronuns[char] = pronunciation;
+      }
     });
   });
 
