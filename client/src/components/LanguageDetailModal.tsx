@@ -14,10 +14,10 @@ export default function LanguageDetailModal({ language, onClose }: LanguageDetai
 
   if (!language) return null;
 
-  // Parse coordinates (format: "lat,lng")
+  // Parse coordinates (format: "lng,lat" from API)
   const coords = language.coordinates.split(',').map(c => c.trim());
-  const lat = coords[0] || '';
-  const lng = coords[1] || '';
+  const lng = coords[0] || ''; // First is longitude
+  const lat = coords[1] || ''; // Second is latitude
   
   // Create OpenStreetMap embed URL
   const mapUrl = lat && lng 
