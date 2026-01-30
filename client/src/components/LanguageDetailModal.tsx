@@ -61,31 +61,24 @@ export default function LanguageDetailModal({ language, onClose }: LanguageDetai
               <span className="font-bold text-foreground min-w-[80px]">地點:</span>
               <span className="text-foreground">{language.location || '—'}</span>
             </div>
+            {language.coordinates && (
+              <div className="flex items-baseline gap-2">
+                <span className="font-bold text-foreground min-w-[80px]">經緯度:</span>
+                <span className="text-foreground">{language.coordinates}</span>
+              </div>
+            )}
           </div>
 
           {/* Map */}
           {mapUrl && (
-            <div className="space-y-2">
-              <h3 className="font-bold text-foreground">地圖:</h3>
-              <div className="w-full h-[400px] border border-border rounded overflow-hidden">
-                <iframe
-                  src={mapUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  title={`${language.name} 地圖`}
-                />
-              </div>
-              <p className="text-sm text-muted-foreground">
-                <a 
-                  href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=12/${lat}/${lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#EB0000] hover:underline"
-                >
-                  在 OpenStreetMap 中查看
-                </a>
-              </p>
+            <div className="w-full h-[400px] border border-border rounded overflow-hidden">
+              <iframe
+                src={mapUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                title={`${language.name} 地圖`}
+              />
             </div>
           )}
 

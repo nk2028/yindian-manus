@@ -170,7 +170,7 @@ export default function Query() {
                   {characters.map((char: string, idx: number) => (
                     <th
                       key={idx}
-                      className="border border-border px-2 py-1 text-center text-lg font-bold"
+                      className="border border-border px-2 py-1 text-center text-lg font-bold bg-[#EB0000]"
                       style={{ width: '192px', maxWidth: '192px', minWidth: '192px' }}
                     >
                       {char}
