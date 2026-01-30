@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
+
 import { Route, Switch, Link, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -53,7 +53,7 @@ function Navigation() {
 }
 
 function Router() {
-  const { language } = useApp();
+  const { language, settings } = useApp();
   const t = getTranslation(language);
   
   // Update document title and lang attribute when language changes
@@ -71,6 +71,15 @@ function Router() {
     document.documentElement.lang = langMap[language];
   }, [language, t.pageTitle]);
   
+  // Apply theme to html element
+  useEffect(() => {
+    if (settings.theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [settings.theme]);
+  
   return (
     <>
       <Navigation />
@@ -78,8 +87,13 @@ function Router() {
         <Route path="/" component={Query} />
         <Route path="/settings" component={Settings} />
         <Route path="/about" component={About} />
-        <Route path="/404" component={NotFound} />
-        <Route component={NotFound} />
+        <Route>
+          {() => {
+            // Redirect to home for any unmatched routes
+            window.location.href = '/';
+            return null;
+          }}
+        </Route>
       </Switch>
     </>
   );

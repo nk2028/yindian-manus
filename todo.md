@@ -1,25 +1,21 @@
-# 音典网页版 - 任务完成列表
+# 音典网页版 - 已完成任务
 
-## 任务1: 添加 light/dark theme 切换功能
-- [x] types/index.ts: 添加 theme 类型定义
-- [x] AppContext.tsx: 添加 theme 状态管理
-- [x] Settings.tsx: 添加主题切换UI
-- [x] i18n.ts: 添加主题相关翻译
-- [ ] index.css: 配置 light/dark 主题颜色变量 (待实现CSS变量切换)
-- [ ] 测试主题切换功能
+## 任务1: 删除 LanguageSelector.tsx 并修改所有描述文案
+- [x] 删除 client/src/components/LanguageSelector.tsx
+- [x] 修改 README.md 中的"漢語方言"为"漢字讀音"
+- [x] 修改 index.html description 中的"漢語方言"为"漢字讀音"
+- [x] 修改 i18n.ts 中所有"漢語方言"/"汉语方言"为"漢字讀音"/"汉字读音"
 
-## 任务2: 更新 index.html 元数据
-- [x] 设置默认 lang="zh-HK"
-- [x] 添加 keywords meta 标签
-- [x] 更新 description,删除"采用瑞士SBB设计风格,简洁高效。"
-- [x] 将"2400種語言"改为"千餘種"
+## 任务2: 实现 dark theme
+- [x] 在 index.css 中配置 dark theme 的 CSS 变量(已存在)
+- [x] 在 App.tsx 中根据 theme 设置添加 dark 类名到 html 元素
+- [x] 删除不必要的 @custom-variant 语法
 
-## 任务3: 创建 README.md
-- [x] 创建项目 README.md 文件
-- [x] 包含项目简介、功能特点、技术栈等信息
+## 任务3: 优化 404 处理
+- [x] 修改 App.tsx 路由配置,404 直接跳转回首页
+- [x] 删除 NotFound.tsx 文件
+- [x] 使用 window.location.href 支持非根路径部署
 
-## 任务4: 清理代码注释
-- [x] 删除所有文件头部的 SBB 相关注释
-- [x] App.tsx, LanguageSelector.tsx, AppContext.tsx
-- [x] About.tsx, NotFound.tsx, Query.tsx, Settings.tsx
-- [x] api.ts, dataProcessor.ts, types/index.ts
+## 任务4: 测试并发布
+- [x] 测试所有功能
+- [x] 创建最终检查点
