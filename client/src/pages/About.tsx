@@ -36,7 +36,7 @@ export default function About() {
               <h3 className="font-bold text-lg mb-2 text-foreground">{t.about.github}</h3>
               <ul className="list-disc list-inside space-y-1.5 ml-4">
                 <li>{t.about.githubFrontend}: <a href="https://github.com/nk2028/yindian-manus" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/nk2028/yindian-manus</a></li>
-                <li>{t.about.githubBackend}: <a href="https://github.com/nk2028/yindian-manus-server" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/nk2028/yindian-manus-server</a></li>
+                <li>{t.about.githubBackend}: <a href="https://github.com/nk2028/yindian-server" target="_blank" rel="noopener noreferrer" className="text-[#EB0000] hover:underline">https://github.com/nk2028/yindian-server</a></li>
               </ul>
             </div>
 

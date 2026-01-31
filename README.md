@@ -55,7 +55,7 @@ pnpm preview
 ## GitHub 仓庫
 
 - **前端**: https://github.com/nk2028/yindian-manus
-- **后端**: https://github.com/nk2028/yindian-manus-server
+- **后端**: https://github.com/nk2028/yindian-server
 
 ## 相關項目
 

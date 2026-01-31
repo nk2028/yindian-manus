@@ -4,9 +4,9 @@ export const ja: Translations = {
   pageTitle: '音典ウェブ版 - 漢字音声検索ツール',
   nav: {
     title: '音典',
-    query: 'Query',
-    settings: 'Settings',
-    about: 'About',
+    query: '検索',
+    settings: '設定',
+    about: 'について',
   },
   query: {
     title: '音典ウェブ版',
