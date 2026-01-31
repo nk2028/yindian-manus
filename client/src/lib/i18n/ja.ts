@@ -38,6 +38,12 @@ export const ja: Translations = {
     clearCacheButton: 'キャッシュをクリア',
     clearCacheConfirm: 'すべてのキャッシュをクリアしますか？ページがリロードされます。',
   },
+  languageDetail: {
+    region: '分区',
+    location: '地点',
+    coordinates: '座標',
+    noMapData: '地図データなし',
+  },
   about: {
     title: '音典ウェブ版について',
     intro: '漢字音典（Yindian）は、漢字の読みを包括的に収集したデータベースです。Maigoが制作したMCPDictを起源とし、最も早い漢字読み検索ツールの一つです。',

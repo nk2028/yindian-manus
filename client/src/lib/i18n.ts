@@ -61,6 +61,14 @@ export interface Translations {
     clearCacheConfirm: string;
   };
   
+  // Language Detail Modal
+  languageDetail: {
+    region: string;
+    location: string;
+    coordinates: string;
+    noMapData: string;
+  };
+  
   // About page
   about: {
     title: string;

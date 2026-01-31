@@ -1,16 +1,15 @@
-# 音典网页版 - 清理和修复
+# 音典网页版 - 更新任务
 
-## 任务1: 删除migration相关代码
-- [x] 搜索所有migration相关代码
-- [x] 删除DISPLAY_MODE_MIGRATION
-- [x] 删除LANGUAGE_MIGRATION
-- [x] 删除migrateDisplayMode和migrateLanguage函数
-- [x] 简化localStorage读取逻辑
+## 任务1: 更新GitHub链接
+- [x] 将所有yindian链接改为yindian-manus
+- [x] 检查README.md
+- [x] 检查About.tsx
 
-## 任务2: 修改nav标题
-- [x] 将“音典網頁版”改回“音典”(所有语言)
-- [x] 为英文标题添加letter-spacing([:lang(en)_&]:tracking-wide)
+## 任务2: 添加语言详情modal的i18n翻译
+- [x] 添加“分區”、“地點”、“經緯度”的翻译
+- [x] 添加“無地圖數據”的翻译
+- [x] 更新所有四种语言的i18n文件
+- [x] 更新LanguageDetailModal使用i18n翻译
 
-## 任务3: 修复表格sticky z-index
-- [x] 修复第一列sticky时的z-index从z-10改为z-20
-- [x] 确保第二列滚动时正确隐藏在第一列后面
+## 任务3: nav按钮改粗体
+- [x] 在App.tsx中为nav按钮将font-medium改为font-bold

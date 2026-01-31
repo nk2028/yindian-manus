@@ -35,7 +35,7 @@ function Navigation() {
               <Link
                 key={item.path}
                 href={item.path}
-                className={`px-4 py-2 text-sm font-medium transition-colors rounded-full ${
+                className={`px-4 py-2 text-sm font-bold transition-colors rounded-full ${
                   location === item.path
                     ? "bg-white text-[#EB0000]"
                     : "text-white hover:bg-gray-200 hover:text-gray-800"

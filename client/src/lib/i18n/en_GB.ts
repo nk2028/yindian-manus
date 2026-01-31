@@ -38,6 +38,12 @@ export const en_GB: Translations = {
     clearCacheButton: 'Clear Cache',
     clearCacheConfirm: 'Are you sure you want to clear all cache? The page will reload.',
   },
+  languageDetail: {
+    region: 'Region',
+    location: 'Location',
+    coordinates: 'Coordinates',
+    noMapData: 'No map data available',
+  },
   about: {
     title: 'About Yindian Web',
     intro: 'Yindian (Chinese Character Phonetic Dictionary) is a comprehensive database collecting Chinese character pronunciations. It originated from MCPDict created by Maigo, one of the earliest Chinese character pronunciation query tools.',

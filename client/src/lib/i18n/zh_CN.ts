@@ -38,6 +38,12 @@ export const zh_CN: Translations = {
     clearCacheButton: '清除缓存',
     clearCacheConfirm: '确定要清除所有缓存吗？页面将会刷新。',
   },
+  languageDetail: {
+    region: '分区',
+    location: '地点',
+    coordinates: '经纬度',
+    noMapData: '无地图数据',
+  },
   about: {
     title: '关于音典网页版',
     intro: '汉字音典（Yindian）是全面收集汉字读音的资料库。它源自 Maigo 制作的 MCPDict，是最早的汉字读音查询工具之一。',

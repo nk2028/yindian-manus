@@ -54,8 +54,8 @@ pnpm preview
 
 ## GitHub 仓庫
 
-- **前端**: https://github.com/nk2028/yindian
-- **后端**: https://github.com/nk2028/yindian-server
+- **前端**: https://github.com/nk2028/yindian-manus
+- **后端**: https://github.com/nk2028/yindian-manus-server
 
 ## 相關項目
 
@@ -73,7 +73,7 @@ pnpm preview
 
 ## 反饋問題
 
-- 在 https://github.com/nk2028/yindian/issues 開 issue
+- 在 https://github.com/nk2028/yindian-manus/issues 開 issue
 - Telegram 群組: https://t.me/nk2028
 - 發送電郵至: support@nk2028.shn.hk
 - QQ 找綾香
